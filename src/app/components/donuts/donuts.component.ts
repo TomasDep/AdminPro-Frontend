@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ChartData, ChartType } from 'chart.js';
 
 @Component({
@@ -6,7 +6,7 @@ import { ChartData, ChartType } from 'chart.js';
   templateUrl: './donuts.component.html',
   styleUrls: ['./donuts.component.css']
 })
-export class DonutsComponent implements OnInit{
+export class DonutsComponent {
   
   @Input() public title: string = 'Sin titulo';
   @Input('labels') public doughnutChartLabels: string[] = ['label1', 'label2', 'label3'];
@@ -20,21 +20,6 @@ export class DonutsComponent implements OnInit{
       },
     ],
   };
-  
-  /* public doughnutChartData: ChartData<'doughnut'> = {
-    labels: this.doughnutChartLabels,
-    datasets: [
-      { 
-        data: this.dataDonuts,
-        backgroundColor: ['#6857e6', '#009fee', '#f02059']
-      },
-    ],
-  }; */
 
   public doughnutChartType: ChartType = 'doughnut';
-
-  ngOnInit(): void {
-    console.log(this.dataDonuts);
-    console.log(this.doughnutChartLabels);
-  }
 }
