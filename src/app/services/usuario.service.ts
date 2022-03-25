@@ -2,11 +2,12 @@ import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap, map, catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 import { RegisterForm } from '../interfaces/register-form.interface';
 import { loginForm } from '../interfaces/login-form.interface';
-import { Router } from '@angular/router';
+import { Usuario } from '../models/usuario.model';
 
 const baseUrl = environment.baseUrl;
 
@@ -17,6 +18,7 @@ declare const gapi: any;
 })
 export class UsuarioService {
   public auth2: any;
+  public usuario: Usuario = new Usuario();
 
   constructor(
     private http: HttpClient, 
@@ -26,15 +28,24 @@ export class UsuarioService {
     this.googleInit();
   }
 
+  get token(): string {
+    return sessionStorage.getItem('token') || '';
+  }
+
+  get uid(): string {
+    return this.usuario.uid || '';
+  }
+  
   validarToken(): Observable<boolean> {
-    const token = sessionStorage.getItem('token') || '';
     
-    return this.http.get(`${ baseUrl }/login/renew`, { headers: { 'x-token': token } })
+    return this.http.get(`${ baseUrl }/login/renew`, { headers: { 'x-token': this.token } })
                     .pipe(
-                      tap((resp: any) => {
+                      map((resp: any) => {
+                        const { email, google, nombre, role, img = '', uid } = resp.usuario;
+                        this.usuario = new Usuario(nombre, email, '', img, google,role, uid);
                         sessionStorage.setItem('token', resp.token);
+                        return true;
                       }),
-                      map(resp => true),
                       catchError(error => of(false))
                     );
   }
@@ -46,6 +57,14 @@ export class UsuarioService {
                     sessionStorage.setItem('token', resp.token);
                   })
                 );
+  }
+
+  actualizarPerfil(data: { email: string, nombre: string, role: string }) {
+    data = {
+      ...data,
+      role: this.usuario.role || 'USER_ROLE'
+    }
+    return this.http.put(`${ baseUrl }/usuarios/${ this.uid }`, data, { headers: { 'x-token': this.token} });
   }
 
   login(formData: loginForm) {
