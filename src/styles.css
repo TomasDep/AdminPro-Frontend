@@ -24,3 +24,31 @@
   width: 200px;
   height: 200px;
 }
+
+.avatar {
+  border: 1px solid gray;
+  border-radius: 100%;
+  width: 75px;
+}
+
+.fondo-modal-imagen {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0px;
+  left: 0%;
+  height: 100%;
+  width: 100%;
+  z-index: 999;
+}
+
+.oculto {
+  display: none;
+}
+
+.w100 {
+  width: 100px;
+}
+
+.w140 {
+  width: 140px;
+}
