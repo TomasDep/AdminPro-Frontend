@@ -8,18 +8,18 @@ const baseUrl: string = environment.baseUrl;
 })
 export class ModalImagenService {
   private _ocultarModal: boolean = true;
-  public nuevaImagen: EventEmitter<string> = new EventEmitter<string>();
+  public nuevaImagen: EventEmitter<string> = new EventEmitter();
   public tipo: string = '';
   public id: string = '';
   public img: string = '';
 
   constructor() { }
 
-  get ocultarModal() {
+  get ocultarModal(): boolean {
     return this._ocultarModal;
   }
   
-  abrirModal(tipo: 'usuarios'|'medicos'|'hospitales', id: string, img: string = 'no-img') {
+  abrirModal(tipo: string, id: string, img: string = 'no-img'): void {
     this._ocultarModal = false;
     this.tipo = tipo;
     this.id = id;
@@ -30,8 +30,8 @@ export class ModalImagenService {
       this.img = `${ baseUrl }/uploads/${ tipo }/${ img }`;
     }
   }
-  
-  cerrarModal() {
+
+  cerrarModal(): void {
     this._ocultarModal = true;
   }
 }
