@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 import Swal from 'sweetalert2';
 
+import { Usuario } from 'src/app/models/usuario.model';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { BusquedaService } from 'src/app/services/busqueda.service';
 import { ModalImagenService } from 'src/app/services/modal-imagen.service';
-import { Usuario } from 'src/app/models/usuario.model';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-usuarios',
@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./usuarios.component.css']
 })
 export class UsuariosComponent implements OnInit, OnDestroy {
+  private tipo: string = 'usuarios';
   public totalUsuarios: number = 0;
   public usuarios: Usuario[] = [];
   public usuariosTemp: Usuario[] = [];
@@ -40,7 +41,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     this.imgSubs.unsubscribe();
   }
 
-  cargarUsuarios() {
+  cargarUsuarios(): void {
     this.cargando = true;
     this.usuarioService.cargarUsuarios(this.desde).subscribe(({total, usuarios}) => {
       this.totalUsuarios = total;
@@ -50,7 +51,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     });
   }
 
-  cambiarPagina(valor: number) {
+  cambiarPagina(valor: number): void {
     this.desde += valor;
     
     if (this.desde < 0) {
@@ -62,18 +63,19 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     this.cargarUsuarios();
   }
 
-  buscar(termino: string) {
+  buscar(termino: string): Usuario[] {
     if (termino.length === 0) {
       return this.usuarios = this.usuariosTemp;
+    } else {
+      this.busquedaService.buscarUsuarios(this.tipo, termino).subscribe(resp => {
+        this.usuarios = resp;
+        return this.usuarios;
+      });
     }
-    
-    this.busquedaService.buscar('usuarios', termino).subscribe(resp => {
-      this.usuarios = resp;
-    });
-    return true;
+    return [];
   }
 
-  eliminarUsuario(usuario: Usuario) {
+  eliminarUsuario(usuario: Usuario): any {
     if (usuario.uid === this.usuarioService.uid) {
       return Swal.fire('Error', 'No puede borrarse a si mismo', 'error');
     } else {
@@ -100,11 +102,11 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     }
   }
 
-  cambiarRole(usuario: Usuario) {
+  cambiarRole(usuario: Usuario): void {
     this.usuarioService.guardarUsuario(usuario).subscribe();
   }
 
-  abrirModal(usuario: Usuario) {
-    this.modalImagenService.abrirModal('usuarios', usuario.uid!, usuario.img);
+  abrirModal(usuario: Usuario): void {
+    this.modalImagenService.abrirModal(this.tipo, usuario.uid!, usuario.img);
   }
 }

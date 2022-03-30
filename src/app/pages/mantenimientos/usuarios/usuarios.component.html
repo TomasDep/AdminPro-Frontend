@@ -63,7 +63,11 @@
                   <span *ngIf="!usuario.google" class="label label-info">Normal</span>
                 </td>
                 <td class="text-nowrap text-center">
-                  <a (click)="eliminarUsuario(usuario)" data-toggle="tooltip" data-original-title="Borrar" class="pointer">
+                  <a (click)="eliminarUsuario(usuario)" 
+                     data-toggle="tooltip" 
+                     data-original-title="Borrar" 
+                     class="pointer"
+                  >
                     <i class="fa fa-close text-danger"></i>
                   </a>
                 </td>
