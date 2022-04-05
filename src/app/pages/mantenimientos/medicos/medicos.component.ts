@@ -47,7 +47,7 @@ export class MedicosComponent implements OnInit, OnDestroy {
   }
 
   abrirModalMedico(medico: Medico): void {
-    this.modalImagenService.abrirModal(this.tipo, medico.uid!, medico.img);
+    this.modalImagenService.abrirModal(this.tipo, medico._id!, medico.img);
   }
 
   buscar(termino: string): Medico[] {
@@ -73,7 +73,7 @@ export class MedicosComponent implements OnInit, OnDestroy {
       confirmButtonText: 'Si, borrarlo'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.medicoService.borrarMedico(medico.uid || '').subscribe(resp => {
+        this.medicoService.borrarMedico(medico._id || '').subscribe(resp => {
           this.cargarMedicos();
           Swal.fire(
             'Borrado!',

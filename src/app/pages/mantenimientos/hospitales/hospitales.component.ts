@@ -49,14 +49,14 @@ export class HospitalesComponent implements OnInit, OnDestroy {
   }
 
   editarHospital(hospital: Hospital): void {
-    this.hospitalService.actualizarHospitales(hospital.uid!, hospital.nombre)
+    this.hospitalService.actualizarHospitales(hospital._id!, hospital.nombre)
         .subscribe(resp => {
           Swal.fire('Actualizado', hospital.nombre, 'success');
         });
   }
 
   eliminarHospital(hospital: Hospital): void {
-    this.hospitalService.borrarHospitales(hospital.uid!)
+    this.hospitalService.borrarHospitales(hospital._id!)
         .subscribe(resp => {
           this.cargarHospitales();
           Swal.fire('Borrado', hospital.nombre, 'success');
@@ -80,7 +80,7 @@ export class HospitalesComponent implements OnInit, OnDestroy {
   }
 
   abrirModalHospitales(hospital: Hospital): void {
-    this.modalImagenService.abrirModal(this.tipo, hospital.uid!, hospital.img);
+    this.modalImagenService.abrirModal(this.tipo, hospital._id!, hospital.img);
   }
 
   buscar(termino: string): Hospital[] {
