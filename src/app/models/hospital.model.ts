@@ -7,7 +7,7 @@ interface IHospitalUser {
 export class Hospital {
   constructor (
     public nombre: string, 
-    public uid?: string,
+    public _id: string,
     public usuario?: IHospitalUser,
     public img?: string, 
   ) { }

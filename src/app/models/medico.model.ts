@@ -9,9 +9,9 @@ interface IMedicoUser {
 export class Medico {
   constructor (
     public nombre: string, 
-    public uid?: string,
+    public hospital: Hospital,
+    public _id: string,
     public img?: string, 
     public usuario?: IMedicoUser,
-    public hospital?: Hospital
   ) { }
 }
