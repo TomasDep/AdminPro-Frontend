@@ -39,6 +39,11 @@ export class BusquedaService {
     return resultados;
   }
 
+  busquedaGlobal(termino: string) {
+    const url = `${ baseUrl }/todo/${ termino }`;
+    return this.http.get(url, this.headers);
+  }
+
   buscarUsuarios(tipo: string, termino: string): Observable<Usuario[]> {
     const url = `${ baseUrl }/todo/coleccion/${ tipo }/${ termino }`;
     return this.http.get<any[]>(url, this.headers)

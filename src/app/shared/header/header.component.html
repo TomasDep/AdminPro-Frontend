@@ -55,8 +55,12 @@
           <a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)">
             <i class="ti-search"></i>
           </a>
-          <form class="app-search">
-            <input type="text" class="form-control" placeholder="Search & enter">
+          <form class="app-search" (submit)="buscar(txtTermino.value)">
+            <input type="text" 
+                   class="form-control" 
+                   placeholder="Buscar medico/hospital/usuario..."
+                   #txtTermino
+            />
               <a class="srh-btn"><i class="ti-close"></i></a> 
           </form>
         </li>
@@ -293,14 +297,14 @@
                   <i class="ti-settings"></i> 
                   Account Setting
                 </a>
-                </li>
+              </li>
               <li role="separator" class="divider"></li>
               <li>
                 <a (click)="logout()" class="pointer">
                   <i class="fa fa-power-off"></i> 
                   Logout
                 </a>
-                </li>
+              </li>
             </ul>
           </div>
         </li>
