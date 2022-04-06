@@ -15,6 +15,8 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
 import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
 import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
 import { MedicoComponent } from './mantenimientos/medicos/medico.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
+import { AdminGuard } from '../guards/admin.guard';
 
 const routes: Routes = [
   { 
@@ -24,6 +26,7 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent, data: { titulo: 'Dashboard' } },
       { path: 'account-settings', component: AccountSettingsComponent, data: { titulo: 'Account Settings' } },
+      { path: 'busqueda/:termino', component: BusquedaComponent, data: { titulo: 'Coincidencias encontradas...' } },
       { path: 'grafica1', component: Grafica1Component, data: { titulo: 'Grafica #1' } },
       { path: 'progress', component: ProgressComponent, data: { titulo: 'Progress' } },
       { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas' } },
@@ -33,7 +36,13 @@ const routes: Routes = [
       { path: 'hospitales', component: HospitalesComponent, data: { titulo: 'Mantenimiento de hospitales' } },
       { path: 'medicos', component: MedicosComponent, data: { titulo: 'Mantenimiento de medicos' } },
       { path: 'medico/:id', component: MedicoComponent, data: { titulo: 'Mantenimiento de medicos' } },
-      { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Mantenimiento de usuarios' } },
+      // Rutas Admin
+      { 
+        path: 'usuarios', 
+        canActivate: [AdminGuard], 
+        component: UsuariosComponent, 
+        data: { titulo: 'Mantenimiento de usuarios' } 
+      },
     ]
   },
 ];
