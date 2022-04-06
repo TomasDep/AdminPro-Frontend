@@ -19,7 +19,7 @@ declare const gapi: any;
 })
 export class UsuarioService {
   public auth2: any;
-  public usuario: Usuario = new Usuario();
+  public usuario!: Usuario;
 
   constructor(
     private http: HttpClient, 
@@ -33,6 +33,10 @@ export class UsuarioService {
     return sessionStorage.getItem('token') || '';
   }
 
+  get rolUsuario(): 'ADMIN_ROLE' | 'USER_ROLE' {
+    return this.usuario.role;
+  }
+
   get uid(): string {
     return this.usuario.uid || '';
   }
@@ -41,14 +45,19 @@ export class UsuarioService {
     return { headers: { 'x-token': this.token } };
   }
 
+  setStorage(token: string, menu: any): void {
+    sessionStorage.setItem('token', token);
+    sessionStorage.setItem('menu', JSON.stringify(menu));
+  }
+
   validarToken(): Observable<boolean> {
     
     return this.http.get(`${ baseUrl }/login/renew`, this.headers)
                     .pipe(
                       map((resp: any) => {
                         const { email, google, nombre, role, img = '', uid } = resp.usuario;
-                        this.usuario = new Usuario(nombre, email, '', img, google,role, uid);
-                        sessionStorage.setItem('token', resp.token);
+                        this.usuario = new Usuario(uid, nombre, email, role, '', img, google);
+                        this.setStorage(resp.token, resp.menu)
                         return true;
                       }),
                       catchError(error => of(false))
@@ -59,7 +68,7 @@ export class UsuarioService {
     return this.http.post(`${ baseUrl }/usuarios`, formData)
                 .pipe(
                   tap((resp: any) => {
-                    sessionStorage.setItem('token', resp.token);
+                    this.setStorage(resp.token, resp.menu)
                   })
                 );
   }
@@ -77,7 +86,7 @@ export class UsuarioService {
     return this.http.post(`${ baseUrl }/login`, formData)
                 .pipe(
                   tap((resp: any) => {
-                    sessionStorage.setItem('token', resp.token);
+                    this.setStorage(resp.token, resp.menu)
                   })
                 );
   }
@@ -86,14 +95,15 @@ export class UsuarioService {
     return this.http.post(`${ baseUrl }/login/google`, { token })
                 .pipe(
                   tap((resp: any) => {
-                    sessionStorage.setItem('token', resp.token);
+                    this.setStorage(resp.token, resp.menu)
                   })
                 );
   }
 
   logout() {
     sessionStorage.removeItem('token');
-    
+    sessionStorage.removeItem('menu');
+  
     this.auth2.signOut().then(() => {
       this.ngZone.run(() => {
         this.router.navigateByUrl('/login');
@@ -121,7 +131,7 @@ export class UsuarioService {
                       delay(1500),
                       map(resp => {
                         const usuarios = resp.usuarios.map(
-                          user => new Usuario(user.nombre, user.email, '', user.img, user.google, user.role, user.uid)
+                          user => new Usuario( user.uid, user.nombre, user.email, user.role, '', user.img, user.google)
                         );
                         return {
                           total: resp.total,
