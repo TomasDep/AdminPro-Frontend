@@ -1,30 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import Swal from 'sweetalert2';
 
-import { ModalImagenService } from 'src/app/services/modal-imagen.service';
-import { FileUploadsService } from '../../services/file-uploads.service';
-
+import { ModalImagenService, FileUploadsService } from '@services/index';
 @Component({
   selector: 'app-modal-imagen',
   templateUrl: './modal-imagen.component.html',
   styleUrls: ['./modal-imagen.component.css']
 })
-export class ModalImagenComponent implements OnInit {
+export class ModalImagenComponent {
   public imagenSubir!: File;
   public imgTemp: any = '';
 
-  constructor(public modalImagenService: ModalImagenService, public fileUploadsService: FileUploadsService) { }
+  constructor(
+    public modalImagenService: ModalImagenService, 
+    public fileUploadsService: FileUploadsService
+  ) { }
 
-  ngOnInit(): void {
-  }
-
-  cerrarModal() {
+  cerrarModal(): void {
     this.imgTemp = null;
     this.modalImagenService.cerrarModal();
   }
 
-  cambiarImagen(event: any) {
+  cambiarImagen(event: any): any {
     const file = event.target.files[0];
     this.imagenSubir = file;
 
@@ -38,11 +36,11 @@ export class ModalImagenComponent implements OnInit {
     reader.onloadend = () => {
       this.imgTemp = reader.result;
     }
-
-    return true;
+    
+    return this.imgTemp;
   }
 
-  subirImagen() {
+  subirImagen(): void {
     const id: string = this.modalImagenService.id;
     const tipo: string = this.modalImagenService.tipo;
 

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import Swal from 'sweetalert2';
 
-import { Usuario } from 'src/app/models/usuario.model';
-import { UsuarioService } from 'src/app/services/usuario.service';
-import { FileUploadsService } from '../../services/file-uploads.service';
+import { Usuario } from '@models/usuario.model';
+import { UsuarioService, FileUploadsService } from '@services/index';
 
 @Component({
   selector: 'app-perfil',
@@ -12,7 +12,6 @@ import { FileUploadsService } from '../../services/file-uploads.service';
   styleUrls: ['./perfil.component.css']
 })
 export class PerfilComponent implements OnInit {
-
   public perfilForm!: FormGroup;
   public usuario: Usuario;
   public imagenSubir!: File;
@@ -33,7 +32,7 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-  actualizarPerfil() {
+  actualizarPerfil(): void {
     console.log(this.perfilForm.value);
     this.usuarioService.actualizarPerfil(this.perfilForm.value).subscribe(resp => {
       const { nombre, email } = this.perfilForm.value;
@@ -45,7 +44,7 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-  cambiarImagen(event: any) {
+  cambiarImagen(event: any): any {
     const file = event.target.files[0];
     this.imagenSubir = file;
 
@@ -60,10 +59,10 @@ export class PerfilComponent implements OnInit {
       this.imgTemp = reader.result;
     }
 
-    return true;
+    return this.imgTemp;
   }
 
-  subirImagen() {
+  subirImagen(): void {
     this.FileUploadsService
         .actualizarFoto(this.imagenSubir, 'usuarios', this.usuario.uid!)
         .then(img => {

@@ -11,14 +11,14 @@ export class SettingsService {
     this.linkTheme?.setAttribute('href', theme);
   }
 
-  changeTheme(theme: string) {
+  changeTheme(theme: string): void {
     const url: string = `./assets/css/colors/${ theme }.css`;
     this.linkTheme?.setAttribute('href', url);
     localStorage.setItem('theme', url);
     this.checkCurrentTheme();
   }
 
-  checkCurrentTheme() {
+  checkCurrentTheme(): void {
     const links: NodeListOf<Element> = document.querySelectorAll('.selector');
 
     links.forEach(element => {

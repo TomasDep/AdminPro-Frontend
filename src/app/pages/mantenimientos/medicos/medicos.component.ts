@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { delay, Subscription } from 'rxjs';
 
-import { Medico } from 'src/app/models/medico.model';
-import { BusquedaService } from 'src/app/services/busqueda.service';
-import { MedicoService } from 'src/app/services/medico.service';
 import Swal from 'sweetalert2';
-import { ModalImagenService } from '../../../services/modal-imagen.service';
+
+import { Medico } from '@models/medico.model';
+import { BusquedaService, MedicoService, ModalImagenService } from '@services/index';
 
 @Component({
   selector: 'app-medicos',
@@ -62,7 +61,7 @@ export class MedicosComponent implements OnInit, OnDestroy {
     return [];
   }
 
-  borrarMedico(medico: Medico) {
+  borrarMedico(medico: Medico): void {
     Swal.fire({
       title: '¿Borrar medico?',
       text: `Esta seguro de borrar a ${ medico.nombre }`,

@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { delay } from 'rxjs';
 
 import Swal from 'sweetalert2';
 
-import { Hospital } from 'src/app/models/hospital.model';
-import { Medico } from 'src/app/models/medico.model';
-import { HospitalService } from 'src/app/services/hospital.service';
-import { MedicoService } from 'src/app/services/medico.service';
-import { delay, pipe } from 'rxjs';
+import { Hospital, Medico } from '@models/index';
+import { HospitalService, MedicoService } from '@services/index';
 
 @Component({
   selector: 'app-medico',
@@ -18,8 +16,8 @@ import { delay, pipe } from 'rxjs';
 export class MedicoComponent implements OnInit {
   public medicoForm!: FormGroup;
   public hospitales: Hospital[] = [];
-  public hospitalSeleccionado!: Hospital;
-  public medicoSeleccionado!: Medico;
+  public hospitalSeleccionado: Hospital = new Hospital('', '');
+  public medicoSeleccionado: Medico = new Medico('', new Hospital('', '') , '');
 
   constructor(
     private fb: FormBuilder,

@@ -1,4 +1,4 @@
-import { Hospital } from './hospital.model';
+import { Hospital } from '@models/hospital.model';
 
 interface IMedicoUser {
   nombre: string;

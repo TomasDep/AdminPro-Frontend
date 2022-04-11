@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Hospital } from 'src/app/models/hospital.model';
-import { Medico } from 'src/app/models/medico.model';
-import { Usuario } from 'src/app/models/usuario.model';
-import { BusquedaService } from '../../services/busqueda.service';
+import { Hospital, Medico, Usuario } from '@models/index';
+import { BusquedaService } from '@services/busqueda.service';
 
 @Component({
   selector: 'app-busqueda',
@@ -25,15 +23,11 @@ export class BusquedaComponent implements OnInit {
     this.activatedRoute.params.subscribe(({ termino }) => this.busquedaGlobal(termino));
   }
 
-  busquedaGlobal(termino: string) {
+  busquedaGlobal(termino: string): void {
     this.busqudaService.busquedaGlobal(termino).subscribe((resp: any) => {
       this.usuarios = resp.usuarios;
       this.medicos = resp.medicos;
       this.hospitales = resp.hospitales;
     });
-  }
-
-  abrirMedico(medico: Medico) {
-    
   }
 }

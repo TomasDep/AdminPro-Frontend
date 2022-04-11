@@ -4,10 +4,8 @@ import { delay } from 'rxjs/operators';
 
 import Swal from 'sweetalert2';
 
-import { Usuario } from 'src/app/models/usuario.model';
-import { UsuarioService } from 'src/app/services/usuario.service';
-import { BusquedaService } from 'src/app/services/busqueda.service';
-import { ModalImagenService } from 'src/app/services/modal-imagen.service';
+import { Usuario } from '@models/usuario.model';
+import { UsuarioService, BusquedaService, ModalImagenService } from '@services/index';
 
 @Component({
   selector: 'app-usuarios',

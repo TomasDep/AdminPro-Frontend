@@ -3,12 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { tap, map, catchError, delay } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+import { environment } from '@env/environment';
 
-import { Usuario } from '../models/usuario.model';
-import { RegisterForm } from '../interfaces/register-form.interface';
-import { loginForm } from '../interfaces/login-form.interface';
-import { CargarUsuarios } from '../interfaces/cargar-usuarios.interface';
+import { Usuario } from '@models/usuario.model';
+import { RegisterForm, loginForm, CargarUsuarios } from '@interfaces/index';
 
 const baseUrl = environment.baseUrl;
 
@@ -19,7 +17,7 @@ declare const gapi: any;
 })
 export class UsuarioService {
   public auth2: any;
-  public usuario!: Usuario;
+  public usuario: Usuario = new Usuario('', '', '', 'USER_ROLE');
 
   constructor(
     private http: HttpClient, 
@@ -41,7 +39,7 @@ export class UsuarioService {
     return this.usuario.uid || '';
   }
   
-  get headers() {
+  get headers(): object {
     return { headers: { 'x-token': this.token } };
   }
 
@@ -51,7 +49,6 @@ export class UsuarioService {
   }
 
   validarToken(): Observable<boolean> {
-    
     return this.http.get(`${ baseUrl }/login/renew`, this.headers)
                     .pipe(
                       map((resp: any) => {
@@ -64,7 +61,7 @@ export class UsuarioService {
                     );
   }
 
-  crearUsuario(formData: RegisterForm) {
+  crearUsuario(formData: RegisterForm): Observable<any> {
     return this.http.post(`${ baseUrl }/usuarios`, formData)
                 .pipe(
                   tap((resp: any) => {
@@ -73,7 +70,9 @@ export class UsuarioService {
                 );
   }
 
-  actualizarPerfil(data: { email: string, nombre: string, role: string }) {
+  actualizarPerfil(
+    data: { email: string, nombre: string, role: string }
+  ): Observable<Object> {
     data = {
       ...data,
       role: this.usuario.role!
@@ -82,7 +81,7 @@ export class UsuarioService {
     return this.http.put(`${ baseUrl }/usuarios/${ this.uid }`, data, this.headers);
   }
 
-  login(formData: loginForm) {
+  login(formData: loginForm): Observable<any> {
     return this.http.post(`${ baseUrl }/login`, formData)
                 .pipe(
                   tap((resp: any) => {
@@ -91,7 +90,7 @@ export class UsuarioService {
                 );
   }
 
-  loginGoogle(token: any) {
+  loginGoogle(token: any): Observable<any> {
     return this.http.post(`${ baseUrl }/login/google`, { token })
                 .pipe(
                   tap((resp: any) => {
@@ -100,7 +99,7 @@ export class UsuarioService {
                 );
   }
 
-  logout() {
+  logout(): void {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('menu');
   
@@ -111,7 +110,7 @@ export class UsuarioService {
     });
   }
 
-  googleInit() {
+  googleInit(): Promise<any> {
     return new Promise((resolve: any) => {
       gapi.load('auth2', () => {
         this.auth2 = gapi.auth2.init({
@@ -123,7 +122,7 @@ export class UsuarioService {
     });
   }
 
-  cargarUsuarios(desde: number = 0) {
+  cargarUsuarios(desde: number = 0): Observable<{ total: number; usuarios: Usuario[]; }> {
     const url = `${ baseUrl }/usuarios?desde=${ desde }`;
     
     return this.http.get<CargarUsuarios>(url, this.headers)
@@ -141,12 +140,13 @@ export class UsuarioService {
                     );
   }
 
-  eliminarUsuario(usuario: Usuario) {
+  eliminarUsuario(usuario: Usuario): Observable<CargarUsuarios> {
     const url = `${ baseUrl }/usuarios/${ usuario.uid }`;
+    
     return this.http.delete<CargarUsuarios>(url, this.headers);
   }
 
-  guardarUsuario(usuario: Usuario) {
+  guardarUsuario(usuario: Usuario): Observable<Object> {
     return this.http.put(`${ baseUrl }/usuarios/${ usuario.uid }`, usuario, this.headers);
   }
 }

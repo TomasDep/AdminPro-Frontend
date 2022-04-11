@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+import { environment } from '@env/environment';
 
-import { Usuario } from '../models/usuario.model';
-import { Hospital } from '../models/hospital.model';
-import { Medico } from '../models/medico.model';
+import { Usuario, Hospital, Medico } from '@models/index';
 
 const baseUrl = environment.baseUrl;
 
@@ -39,13 +37,15 @@ export class BusquedaService {
     return resultados;
   }
 
-  busquedaGlobal(termino: string) {
+  busquedaGlobal(termino: string): Observable<ArrayBuffer> {
     const url = `${ baseUrl }/todo/${ termino }`;
+    
     return this.http.get(url, this.headers);
   }
 
   buscarUsuarios(tipo: string, termino: string): Observable<Usuario[]> {
     const url = `${ baseUrl }/todo/coleccion/${ tipo }/${ termino }`;
+    
     return this.http.get<any[]>(url, this.headers)
                 .pipe(
                   map((resp: any) => {
@@ -60,6 +60,7 @@ export class BusquedaService {
 
   buscarHospitales(tipo: string, termino: string): Observable<Hospital[]> {
     const url = `${ baseUrl }/todo/coleccion/${ tipo }/${ termino }`;
+    
     return this.http.get<any[]>(url, this.headers)
                 .pipe(
                   map((resp: any) => {
@@ -74,6 +75,7 @@ export class BusquedaService {
 
   buscarMedicos(tipo: string, termino: string): Observable<Medico[]> {
     const url = `${ baseUrl }/todo/coleccion/${ tipo }/${ termino }`;
+    
     return this.http.get<any[]>(url, this.headers)
                 .pipe(
                   map((resp: any) => {

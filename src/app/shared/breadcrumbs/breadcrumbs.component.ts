@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivationEnd, Router } from '@angular/router';
-import { filter, map, Subscription } from 'rxjs';
+import { filter, map, Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -24,7 +24,7 @@ export class BreadcrumbsComponent implements OnDestroy{
     this.tituloSub$.unsubscribe();
   }
 
-  getDataRutas() {
+  getDataRutas(): Observable<any> {
     return this.router.events
       .pipe(
         filter((event): event is ActivationEnd => event instanceof ActivationEnd),

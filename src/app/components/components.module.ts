@@ -6,7 +6,7 @@ import { NgChartsModule } from 'ng2-charts';
 
 import { IncrementadorComponent } from './incrementador/incrementador.component';
 import { DonutsComponent } from './donuts/donuts.component';
-import { ModalImagenComponent } from './modal-imagen/modal-imagen.component';
+import { ModalImagenComponent } from '@components/index';
 
 @NgModule({
   declarations: [

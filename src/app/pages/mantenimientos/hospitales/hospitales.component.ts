@@ -4,11 +4,12 @@ import { delay } from 'rxjs/operators';
 
 import Swal from 'sweetalert2';
 
-import { Hospital } from 'src/app/models/hospital.model';
-import { HospitalService } from 'src/app/services/hospital.service';
-import { ModalImagenService } from '../../../services/modal-imagen.service';
-import { BusquedaService } from 'src/app/services/busqueda.service';
-
+import { Hospital } from '@models/hospital.model';
+import { 
+  HospitalService, 
+  ModalImagenService, 
+  BusquedaService 
+} from '@services/index';
 @Component({
   selector: 'app-hospitales',
   templateUrl: './hospitales.component.html',

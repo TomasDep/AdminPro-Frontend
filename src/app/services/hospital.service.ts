@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
-
-import { Hospital } from '../models/hospital.model';
 import { Observable } from 'rxjs';
+import { environment } from '@env/environment';
+
+import { Hospital } from '@models/hospital.model';
 
 const baseUrl: string = environment.baseUrl;
 
@@ -32,19 +32,19 @@ export class HospitalService {
                 );
   }
 
-  crearHospitales(nombre: string) {
+  crearHospitales(nombre: string): Observable<ArrayBuffer> {
     const url: string = `${ baseUrl }/hospitales`;
 
     return this.http.post(url, { nombre }, this.headers);
   }
 
-  actualizarHospitales(uid: string, nombre: string) {
+  actualizarHospitales(uid: string, nombre: string): Observable<ArrayBuffer> {
     const url: string = `${ baseUrl }/hospitales/${ uid }`;
 
     return this.http.put(url, { nombre }, this.headers);
   }
 
-  borrarHospitales(uid: string) {
+  borrarHospitales(uid: string): Observable<ArrayBuffer> {
     const url: string = `${ baseUrl }/hospitales/${ uid }`;
 
     return this.http.delete(url, this.headers);

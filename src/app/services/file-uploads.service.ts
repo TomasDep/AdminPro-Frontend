@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment } from '@env/environment';
 
 const baseUrl = environment.baseUrl;
 
@@ -10,11 +10,11 @@ export class FileUploadsService {
 
   constructor() { }
 
-  async actualizarFoto(
+  async actualizarFoto (
     archivo: File, 
     tipo: string,
     id: string
-  ) {
+  ): Promise<any> {
     try {
       const url = `${ baseUrl }/uploads/${ tipo }/${ id }`;
       const formData = new FormData();
@@ -32,7 +32,6 @@ export class FileUploadsService {
       if (data.ok) {
         return data.nombreArchivo
       } else {
-        console.log(data.message);
         return false;
       }
     } catch (error) {
