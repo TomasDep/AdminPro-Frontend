@@ -1,9 +1,16 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { 
+  AbstractControl,
+  FormControl,
+  FormGroup, 
+  Validators, 
+  ValidatorFn 
+} from '@angular/forms';
 import { Router } from '@angular/router';
+
 import Swal from 'sweetalert2';
 
-import { UsuarioService } from 'src/app/services/usuario.service';
+import { UsuarioService } from '@services/usuario.service';
 
 @Component({
   selector: 'app-register',
@@ -11,38 +18,31 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  public formSubmitted = true;
-  public registerForm = this.formBuilder.group({
-    nombre: ['', [Validators.required, Validators.minLength(3)]],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-    passwordConfirm: ['', Validators.required],
-    terminos: [false, Validators.required],
-  }, {
-    validators: this.contrasenasIguales('password', 'passwordConfirm')
-  });
+  public formSubmitted: boolean = true;
+  public registerForm: FormGroup = new FormGroup({
+    nombre: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', Validators.required),
+    passwordConfirm: new FormControl('', Validators.required),
+    terminos: new FormControl(false, Validators.required),
+  }, { validators: this.contrasenasIguales('password', 'passwordConfirm') });
 
   constructor(
-    private formBuilder: FormBuilder, 
     private usuarioService: UsuarioService,
     private router: Router
   ) { }
 
-  crearUsuario() {
+  crearUsuario(): void {
     this.formSubmitted = true;
-    console.log(this.registerForm.value);
-
+    
     if (this.registerForm.invalid) {
       return;
     }
 
     this.usuarioService.crearUsuario(this.registerForm.value)
-        .subscribe(resp => {
-          console.log('usuario creado');
-          console.log(resp);
-          this.router.navigateByUrl('/');
-        }, (err) => {
-          Swal.fire('Error', err.error.message, 'error');
+        .subscribe({
+          next: (resp: any) => this.router.navigateByUrl('/'),
+          error: (err: any) => Swal.fire('Error', err.error.message, 'error')
         });
   }
 
@@ -54,11 +54,11 @@ export class RegisterComponent {
     }
   }
 
-  aceptarTerminos() {
+  aceptarTerminos(): boolean {
     return !this.registerForm.get('terminos')?.value && this.formSubmitted;
   }
 
-  contrasenasInvalidas() {
+  contrasenasInvalidas(): boolean {
     const password = this.registerForm.get('password')?.value;
     const passwordConfirm = this.registerForm.get('passwordConfirm')?.value;
 
@@ -69,15 +69,16 @@ export class RegisterComponent {
     }
   }
 
-  contrasenasIguales(password: string, passwordConfirm: string) {
-    return (formGroup: FormGroup) => {
-      const passControl = formGroup.get(password);
-      const passConfirmControl = formGroup.get(passwordConfirm);
+  contrasenasIguales(password: string, passwordConfirm: string): ValidatorFn {
+    return (controls: AbstractControl) => {
+      const passControl = controls.get(password);
+      const passConfirmControl = controls.get(passwordConfirm);
 
       if (passControl?.value === passConfirmControl?.value) {
-        passConfirmControl?.setErrors(null);
+        return null;
       } else {
-        passConfirmControl?.setErrors({ noEsIgual: true });
+        controls.get(passwordConfirm)?.setErrors({matching: true});
+        return { matching: true };
       }
     }
   }
