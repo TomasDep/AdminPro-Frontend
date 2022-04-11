@@ -3,6 +3,19 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "@auth/*": ["src/app/auth/*"],
+      "@components/*": ["src/app/components/*"],
+      "@guards/*": ["src/app/guards/*"],
+      "@interfaces/*": ["src/app/interfaces/*"],
+      "@models/*": ["src/app/models/*"],
+      "@pages/*": ["src/app/pages/*"],
+      "@pipes/*": ["src/app/pipes/*"],
+      "@services/*": ["src/app/services/*"],
+      "@shared/*": ["src/app/shared/*"],
+      "@noPageFound/*": ["src/app/nopagefound/*"],
+      "@env/*": ["src/environments/*"]
+    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
