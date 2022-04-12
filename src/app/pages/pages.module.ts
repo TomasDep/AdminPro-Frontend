@@ -6,32 +6,25 @@ import { RouterModule } from '@angular/router';
 import { ComponentsModule } from '@components/components.module';
 import { SharedModule } from '@shared/shared.module';
 import { PipesModule } from '@pipes/pipes.module';
-
-import { ProgressComponent } from './progress/progress.component';
-import { Grafica1Component } from './grafica1/grafica1.component';
-import { PagesComponent } from './pages.component';
-import { PromesasComponent } from './promesas/promesas.component';
-import { RxjsComponent } from './rxjs/rxjs.component';
 import { 
-  DashboardComponent,
   AccountSettingsComponent,
+  BusquedaComponent,
+  DashboardComponent,
+  Grafica1Component,
+  HospitalesComponent,
+  MedicoComponent,
+  MedicosComponent,
+  PagesComponent,
   PerfilComponent,
   UsuariosComponent,
-  HospitalesComponent,
-  MedicosComponent,
-  MedicoComponent,
-  BusquedaComponent,
 } from '@pages/index';
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    ProgressComponent,
     Grafica1Component,
     PagesComponent,
     AccountSettingsComponent,
-    PromesasComponent,
-    RxjsComponent,
     PerfilComponent,
     UsuariosComponent,
     HospitalesComponent,
@@ -50,11 +43,9 @@ import {
   ],
   exports: [
     DashboardComponent,
-    ProgressComponent,
     Grafica1Component,
     PagesComponent,
     AccountSettingsComponent
-
   ]
 })
 export class PagesModule { }

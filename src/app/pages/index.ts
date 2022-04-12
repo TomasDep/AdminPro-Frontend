@@ -6,6 +6,7 @@ export * from './mantenimientos/usuarios/usuarios.component';
 export * from './mantenimientos/medicos/medicos.component';
 export * from './mantenimientos/medicos/medico/medico.component';
 export * from './perfil/perfil.component';
+export * from './grafica1/grafica1.component';
 export * from './pages.component';
 
 export * from './child-routes.module';
