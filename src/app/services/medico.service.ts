@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, delay } from 'rxjs/operators';
 import { environment } from '@env/environment';
 
 import { Medico } from '@models/medico.model';
@@ -12,6 +12,7 @@ const baseUrl: string = environment.baseUrl;
   providedIn: 'root'
 })
 export class MedicoService {
+  public totalMedicos: number = 0;
 
   constructor(private http: HttpClient) { }
 
@@ -23,12 +24,16 @@ export class MedicoService {
     return { headers: { 'x-token': this.token, } };
   }
 
-  cargarMedicos(): Observable<Medico[]> {
-    const url: string = `${ baseUrl }/medicos`;
+  cargarMedicos(desde: number = 0): Observable<Medico[]> {
+    const url: string = `${ baseUrl }/medicos?desde=${ desde }`;
 
     return this.http.get(url, this.headers)
                 .pipe(
-                  map<any, Medico[]>((resp: { ok: boolean, message: string, medicos: Medico[] }) => resp.medicos)
+                  delay(1500),
+                  map<any, Medico[]>(resp =>{
+                    this.totalMedicos = resp.total;
+                    return resp.medicos;
+                  })
                 );
   }
 

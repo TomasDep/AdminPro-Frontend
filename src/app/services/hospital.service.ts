@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, delay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
 
@@ -12,6 +12,7 @@ const baseUrl: string = environment.baseUrl;
   providedIn: 'root'
 })
 export class HospitalService {
+  public totalHospitales: number = 0;
 
   constructor(private http: HttpClient) { }
 
@@ -23,14 +24,22 @@ export class HospitalService {
     return { headers: { 'x-token': this.token, } };
   }
 
-  cargarHospitales(): Observable<Hospital[]> {
-    const url: string = `${ baseUrl }/hospitales`;
+  cargarHospitales(desde: number = 0): Observable<Hospital[]> {
+    const url: string = `${ baseUrl }/hospitales?desde=${ desde }`;
 
     return this.http.get(url, this.headers)
                 .pipe(
-                  map<any, Hospital[]>((resp: { ok: boolean, message: string, hospitales: Hospital[] }) => resp.hospitales)
+                  delay(1500),
+                  map<any, Hospital[]>(resp => { 
+                    this.totalHospitales = resp.total;
+                    return resp.hospitales;
+                  })
                 );
   }
+
+  obtenerTotal(total: number): number {
+    return total;
+  } 
 
   crearHospitales(nombre: string): Observable<ArrayBuffer> {
     const url: string = `${ baseUrl }/hospitales`;

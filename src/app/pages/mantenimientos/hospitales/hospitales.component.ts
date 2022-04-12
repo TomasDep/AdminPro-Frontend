@@ -21,6 +21,8 @@ export class HospitalesComponent implements OnInit, OnDestroy {
   public hospitales: Hospital[] = [];
   public hospitalesTemp: Hospital[] = [];
   public cargando: boolean = true;
+  public desde: number = 0;
+  public totalHospitales: number = 0;
 
   constructor(
     private hospitalService: HospitalService, 
@@ -42,11 +44,24 @@ export class HospitalesComponent implements OnInit, OnDestroy {
 
   cargarHospitales(): void {
     this.cargando = true;
-    this.hospitalService.cargarHospitales().subscribe(hospitales => {
+    this.hospitalService.cargarHospitales(this.desde).subscribe(hospitales => {
       this.hospitales = hospitales;
       this.hospitalesTemp = hospitales;
+      this.totalHospitales = this.hospitalService.totalHospitales;
       this.cargando = false;
     });
+  }
+
+  cambiarPagina(valor: number): void {
+    this.desde += valor;
+    
+    if (this.desde < 0) {
+      this.desde = 0;
+    } else if (this.desde >= this.totalHospitales) {
+      this.desde -= valor;
+    }
+
+    this.cargarHospitales();
   }
 
   editarHospital(hospital: Hospital): void {

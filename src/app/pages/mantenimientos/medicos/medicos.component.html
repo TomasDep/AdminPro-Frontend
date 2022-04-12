@@ -31,7 +31,7 @@
 
         <div class="row">
           <div class="col-8">
-            <h4 class="card-title">Medicos ({{ medicos.length }})</h4>
+            <h4 class="card-title">Medicos ({{ totalMedicos }})</h4>
             <h6 class="card-subtitle">Medicos registrados en la aplicación</h6>
           </div>
           <div class="col-4">
@@ -77,10 +77,11 @@
             </tbody>
           </table>
         </div>
-
-        <!-- <button class="btn btn-secondary">Anterior</button> -->
-        <!-- &nbsp; -->
-        <!-- <button class="btn btn-secondary">Siguiente</button> -->
+        <div *ngIf="txtTermino.value.length === 0">
+          <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anterior</button>
+          &nbsp;
+          <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguiente</button>
+        </div>
       </div>
     </div>
   </div>

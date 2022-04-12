@@ -17,6 +17,8 @@ export class MedicosComponent implements OnInit, OnDestroy {
   public tipo: string = 'medicos';
   public cargando: boolean = true;
   public imgSubs: Subscription = new Subscription();
+  public desde: number = 0;
+  public totalMedicos: number = 0;
 
   constructor(
     private medicoService: MedicoService,
@@ -38,11 +40,24 @@ export class MedicosComponent implements OnInit, OnDestroy {
 
   cargarMedicos(): void {
     this.cargando = true;
-    this.medicoService.cargarMedicos().subscribe(medicos => {
-      this.cargando = false;
+    this.medicoService.cargarMedicos(this.desde).subscribe(medicos => {
       this.medicos = medicos;
       this.medicosTemp = medicos;
+      this.totalMedicos = this.medicoService.totalMedicos;
+      this.cargando = false;
     });
+  }
+
+  cambiarPagina(valor: number): void {
+    this.desde += valor;
+    
+    if (this.desde < 0) {
+      this.desde = 0;
+    } else if (this.desde >= this.totalMedicos) {
+      this.desde -= valor;
+    }
+
+    this.cargarMedicos();
   }
 
   abrirModalMedico(medico: Medico): void {
