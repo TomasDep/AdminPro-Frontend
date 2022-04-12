@@ -47,7 +47,7 @@ export class MedicoComponent implements OnInit {
       this.hospitales = hospitales;
     });
   }
-
+  
   cargarMedico(id: string): void {
     if (id === 'nuevo') {
       return;
@@ -69,7 +69,7 @@ export class MedicoComponent implements OnInit {
         }
       });
   }
-
+  
   guardarMedico(): void {
     const nombre: string = this.medicoForm.value.nombre;
     const hospital: string = this.medicoForm.value.hospital;

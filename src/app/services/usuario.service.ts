@@ -130,12 +130,19 @@ export class UsuarioService {
                       delay(1500),
                       map(resp => {
                         const usuarios = resp.usuarios.map(
-                          user => new Usuario( user.uid, user.nombre, user.email, user.role, '', user.img, user.google)
-                        );
+                          user => new Usuario( 
+                                               user.uid, 
+                                               user.nombre, 
+                                               user.email, 
+                                               user.role, 
+                                               '', 
+                                               user.img, 
+                                               user.google
+                                              ));
                         return {
                           total: resp.total,
                           usuarios
-                        }
+                        };
                       })
                     );
   }
