@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
 
 import { Hospital } from '@models/hospital.model';
+import { ITotalHospitales } from '@interfaces/totalModels.interface';
 
 const baseUrl: string = environment.baseUrl;
 
@@ -20,7 +21,7 @@ export class HospitalService {
     return sessionStorage.getItem('token') || '';
   }
   
-  get headers(): any {
+  get headers(): object {
     return { headers: { 'x-token': this.token, } };
   }
 
@@ -37,23 +38,32 @@ export class HospitalService {
                 );
   }
 
+  cargaTotalHosptiales(): Observable<number> {
+    const url = `${ baseUrl }/hospitales/total`;
+
+    return this.http.get<ITotalHospitales>(url, this.headers)
+              .pipe(
+                map(resp => resp.hospitales)
+              );
+  }
+
   obtenerTotal(total: number): number {
     return total;
   } 
 
-  crearHospitales(nombre: string): Observable<ArrayBuffer> {
+  crearHospitales(nombre: string): Observable<Object> {
     const url: string = `${ baseUrl }/hospitales`;
 
     return this.http.post(url, { nombre }, this.headers);
   }
 
-  actualizarHospitales(uid: string, nombre: string): Observable<ArrayBuffer> {
+  actualizarHospitales(uid: string, nombre: string): Observable<Object> {
     const url: string = `${ baseUrl }/hospitales/${ uid }`;
 
     return this.http.put(url, { nombre }, this.headers);
   }
 
-  borrarHospitales(uid: string): Observable<ArrayBuffer> {
+  borrarHospitales(uid: string): Observable<Object> {
     const url: string = `${ baseUrl }/hospitales/${ uid }`;
 
     return this.http.delete(url, this.headers);

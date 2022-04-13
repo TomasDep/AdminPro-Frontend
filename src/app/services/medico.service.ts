@@ -5,6 +5,7 @@ import { map, delay } from 'rxjs/operators';
 import { environment } from '@env/environment';
 
 import { Medico } from '@models/medico.model';
+import { ITotalMedicos } from '@interfaces/totalModels.interface';
 
 const baseUrl: string = environment.baseUrl;
 
@@ -20,8 +21,8 @@ export class MedicoService {
     return sessionStorage.getItem('token') || '';
   }
   
-  get headers(): any {
-    return { headers: { 'x-token': this.token, } };
+  get headers(): object {
+    return { headers: { 'x-token': this.token } };
   }
 
   cargarMedicos(desde: number = 0): Observable<Medico[]> {
@@ -37,6 +38,15 @@ export class MedicoService {
                 );
   }
 
+  cargaTotalMedicos(): Observable<number> {
+    const url: string = `${ baseUrl }/medicos/total`;
+
+    return this.http.get<ITotalMedicos>(url, this.headers)
+                .pipe(
+                  map(resp => resp.medicos)
+                );
+  }
+  
   cargarMedicoPorId(uid: string): Observable<Medico> {
     const url: string = `${ baseUrl }/medicos/${ uid }`;
 
@@ -46,20 +56,20 @@ export class MedicoService {
                 );
   }
 
-  crearMedico(medico: { nombre: string, hospital: string }): Observable<ArrayBuffer> {
+  crearMedico(medico: { nombre: string, hospital: string }): Observable<Object> {
     const url: string = `${ baseUrl }/medicos`;
 
     return this.http.post(url, medico, this.headers);
   }
 
-  actualizarMedico(medico: Medico): Observable<ArrayBuffer> {
+  actualizarMedico(medico: Medico): Observable<Object> {
     const url: string = `${ baseUrl }/medicos/${ medico._id }`;
     const { nombre, hospital } = medico;
 
     return this.http.put(url, { nombre, hospital }, this.headers);
   }
 
-  borrarMedico(uid: string): Observable<ArrayBuffer> {
+  borrarMedico(uid: string): Observable<Object> {
     const url: string = `${ baseUrl }/medicos/${ uid }`;
 
     return this.http.delete(url, this.headers);

@@ -6,7 +6,7 @@ import { tap, map, catchError, delay } from 'rxjs/operators';
 import { environment } from '@env/environment';
 
 import { Usuario } from '@models/usuario.model';
-import { RegisterForm, loginForm, CargarUsuarios } from '@interfaces/index';
+import { IRegisterForm, ILoginForm, ICargarUsuarios, ITotalUsuarios } from '@interfaces/index';
 
 const baseUrl = environment.baseUrl;
 
@@ -18,6 +18,7 @@ declare const gapi: any;
 export class UsuarioService {
   public auth2: any;
   public usuario: Usuario = new Usuario('', '', '', 'USER_ROLE');
+  public totalUsuarios: number = 0;
 
   constructor(
     private http: HttpClient, 
@@ -61,7 +62,7 @@ export class UsuarioService {
                     );
   }
 
-  crearUsuario(formData: RegisterForm): Observable<any> {
+  crearUsuario(formData: IRegisterForm): Observable<any> {
     return this.http.post(`${ baseUrl }/usuarios`, formData)
                 .pipe(
                   tap((resp: any) => {
@@ -81,7 +82,7 @@ export class UsuarioService {
     return this.http.put(`${ baseUrl }/usuarios/${ this.uid }`, data, this.headers);
   }
 
-  login(formData: loginForm): Observable<any> {
+  login(formData: ILoginForm): Observable<any> {
     return this.http.post(`${ baseUrl }/login`, formData)
                 .pipe(
                   tap((resp: any) => {
@@ -125,7 +126,7 @@ export class UsuarioService {
   cargarUsuarios(desde: number = 0): Observable<{ total: number; usuarios: Usuario[]; }> {
     const url = `${ baseUrl }/usuarios?desde=${ desde }`;
     
-    return this.http.get<CargarUsuarios>(url, this.headers)
+    return this.http.get<ICargarUsuarios>(url, this.headers)
                     .pipe(
                       delay(1500),
                       map(resp => {
@@ -139,6 +140,7 @@ export class UsuarioService {
                                                user.img, 
                                                user.google
                                               ));
+                        this.totalUsuarios = resp.total;
                         return {
                           total: resp.total,
                           usuarios
@@ -147,10 +149,19 @@ export class UsuarioService {
                     );
   }
 
-  eliminarUsuario(usuario: Usuario): Observable<CargarUsuarios> {
+  cargaTotalUsuarios(): Observable<number> {
+    const url = `${ baseUrl }/usuarios/total`;
+
+    return this.http.get<ITotalUsuarios>(url, this.headers)
+              .pipe(
+                map(resp => resp.usuarios)
+              );
+  }
+
+  eliminarUsuario(usuario: Usuario): Observable<ICargarUsuarios> {
     const url = `${ baseUrl }/usuarios/${ usuario.uid }`;
     
-    return this.http.delete<CargarUsuarios>(url, this.headers);
+    return this.http.delete<ICargarUsuarios>(url, this.headers);
   }
 
   guardarUsuario(usuario: Usuario): Observable<Object> {
