@@ -8,13 +8,12 @@
             <span class="hide-menu">{{ usuario.nombre }}</span>
           </a>
           <ul aria-expanded="false" class="collapse">
-              <li><a routerLinkActive="active" routerLink="./perfil">My Profile</a></li>
-              <li><a routerLink="account-settings">Account Setting</a></li>
-              <li><a routerLink="/login">Logout</a></li>
+              <li><a routerLinkActive="active" routerLink="./perfil">{{ "SIDEBAR.PROFILE" | translate }}</a></li>
+              <li><a routerLink="account-settings">{{ "SIDEBAR.ACOUNT" | translate }}</a></li>
+              <li><a routerLink="/login">{{ "SIDEBAR.LOGOUT" | translate }}</a></li>
           </ul>
         </li>
         <li class="nav-devider"></li>
-        <li class="nav-small-cap">PERSONAL</li>
         <li *ngFor="let item of menuItems"> 
           <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
             <i class="{{ item.icono }}"></i>

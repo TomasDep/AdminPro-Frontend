@@ -1,0 +1,48 @@
+{
+  "BREADCRUMBS": {
+    "HOME": "Inicio",
+    "PAGES": "página",
+    "DASHBOARD": "Panel de incio"
+  },
+  "HEADER": {
+    "PROFILE": "Mi Perfil",
+    "ACOUNT": "Configuración de cuenta",
+    "LOGOUT": "Cerrar sesión",
+    "LANG": {
+      "ENGLISH": "Ingles",
+      "SPAIN": "Español"
+    }
+  },
+  "SIDEBAR": {
+    "PROFILE": "Mi Perfil",
+    "ACOUNT": "Configuración de cuenta",
+    "LOGOUT": "Cerrar sesión"
+  },
+  "SETTINGS": {
+    "THEME": {
+      "TITLE": "Seleccione el Tema",
+      "SIDEBARLIGHT": "Con el sidebar claro",
+      "SIDEBARDARK": "Con el sidebar oscuro"
+    }
+  },
+  "SEARCH": {
+    "MEDIC": {
+      "TITLE": "Médico",
+      "NOTFOUD": "No hay médicos con ese término",
+      "AVATAR": "Imagen",
+      "NAME": "Nombre"
+    },
+    "HOSPITAL": {
+      "TITLE": "Hospitales",
+      "NOTFOUD": "No hay hospitales con ese término",
+      "AVATAR": "Imagen",
+      "NAME": "Nombre"
+    },
+    "USER": {
+      "TITLE": "Usuarios",
+      "NOTFOUD": "No hay usuarios con ese término",
+      "AVATAR": "Imagen",
+      "NAME": "Nombre"
+    }
+  }
+}

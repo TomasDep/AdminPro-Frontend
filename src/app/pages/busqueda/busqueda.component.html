@@ -2,18 +2,18 @@
   <div class="col-4">
     <div class="card">
       <div class="card-body">
-        <h3>Medicos</h3>
+        <h3>{{ "SEARCH.MEDIC.TITLE" | translate }}</h3>
 
         <div class="alert alert-info animated fadeIn fast" *ngIf="medicos.length === 0">
-          <p>No hay medicos con ese termino</p>
+          <p>{{ "SEARCH.MEDIC.NOTFOUD" | translate }}</p>
         </div>
 
         <div class="table-responsive" *ngIf="medicos.length > 0">
           <table class="table">
               <thead>
                   <tr>
-                      <th>Avatar</th>
-                      <th>Nombre</th>
+                      <th>{{ "SEARCH.MEDIC.AVATAR" | translate }}</th>
+                      <th>{{ "SEARCH.MEDIC.NAME" | translate }}</th>
                   </tr>
               </thead>
               <tbody>
@@ -35,18 +35,18 @@
   <div class="col-4">
     <div class="card">
       <div class="card-body">
-        <h3>Hospitales</h3>
+        <h3>{{ "SEARCH.HOSPITAL.TITLE" | translate }}</h3>
 
         <div class="alert alert-info animated fadeIn fast" *ngIf="hospitales.length === 0">
-          <p>No hay hospitales con ese termino</p>
+          <p>{{ "SEARCH.HOSPITAL.NOTFOUD" | translate }}</p>
         </div>
 
         <div class="table-responsive" *ngIf="hospitales.length > 0">
           <table class="table">
               <thead>
                   <tr>
-                      <th>Avatar</th>
-                      <th>Nombre</th>
+                      <th>{{ "SEARCH.HOSPITAL.AVATAR" | translate }}</th>
+                      <th>{{ "SEARCH.HOSPITAL.NAME" | translate }}</th>
                   </tr>
               </thead>
               <tbody>
@@ -66,18 +66,18 @@
   <div class="col-4">
     <div class="card">
       <div class="card-body">
-        <h3>Usuarios</h3>
+        <h3>{{ "SEARCH.USER.TITLE" | translate }}</h3>
 
         <div class="alert alert-info animated fadeIn fast" *ngIf="usuarios.length === 0">
-          <p>No hay usuarios con ese termino</p>
+          <p>{{ "SEARCH.USER.NOTFOUD" | translate }}</p>
         </div>
 
         <div class="table-responsive" *ngIf="usuarios.length > 0">
           <table class="table">
               <thead>
                   <tr>
-                      <th>Avatar</th>
-                      <th>Nombre</th>
+                      <th>{{ "SEARCH.USER.AVATAR" | translate }}</th>
+                      <th>{{ "SEARCH.USER.NAME" | translate }}</th>
                   </tr>
               </thead>
               <tbody>

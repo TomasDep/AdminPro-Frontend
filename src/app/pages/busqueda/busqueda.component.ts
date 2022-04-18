@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Hospital, Medico, Usuario } from '@models/index';
 import { BusquedaService } from '@services/busqueda.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-busqueda',
@@ -16,7 +17,8 @@ export class BusquedaComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private busqudaService: BusquedaService
+    private busqudaService: BusquedaService,
+    public translate: TranslateService
   ) { }
 
   ngOnInit(): void {

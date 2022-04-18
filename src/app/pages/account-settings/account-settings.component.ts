@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { TranslateService } from '@ngx-translate/core';
+
 import { SettingsService } from '@services/settings.service';
 
 @Component({
@@ -10,7 +12,10 @@ import { SettingsService } from '@services/settings.service';
 export class AccountSettingsComponent implements OnInit {
   public linkTheme: Element | null = document.querySelector('#theme');
   
-  constructor(private settingsService: SettingsService) { }
+  constructor(
+    private settingsService: SettingsService,
+    public translate: TranslateService
+  ) { }
 
   ngOnInit(): void {
     this.settingsService.checkCurrentTheme();

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { TranslateService } from '@ngx-translate/core';
+
 import { Usuario } from '@models/usuario.model';
 import { SidebarService, UsuarioService } from '@services/index';
 
@@ -14,7 +16,8 @@ export class SidebarComponent  {
 
   constructor(
     private usuarioService: UsuarioService, 
-    public sidebarService: SidebarService
+    public sidebarService: SidebarService,
+    public translate: TranslateService
   ) { 
     this.usuario = usuarioService.usuario;
     this.menuItems = sidebarService.menu;

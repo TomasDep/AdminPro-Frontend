@@ -2,10 +2,10 @@
   <div class="col-5">
     <div class="card">
       <div class="card-body">
-        <h4>Seleccione el Tema</h4>
+        <h4>{{ "SETTINGS.THEME.TITLE" | translate }}</h4>
         <div class="r-panel-body">
           <ul id="themecolors" class="m-t-20">
-            <li><b>Con el sidebar claro</b></li>
+            <li><b>{{ "SETTINGS.THEME.SIDEBARLIGHT" | translate }}</b></li>
             <li><a (click)="changeTheme('default')" data-theme="default" class="selector default-theme working">1</a></li>
             <li><a (click)="changeTheme('green')" data-theme="green" class="selector green-theme">2</a></li>
             <li><a (click)="changeTheme('red')" data-theme="red" class="selector red-theme">3</a></li>
@@ -13,7 +13,7 @@
             <li><a (click)="changeTheme('purple')" data-theme="purple" class="selector purple-theme">5</a></li>
             <li><a (click)="changeTheme('megna')" data-theme="megna" class="selector megna-theme">6</a></li>
             
-            <li class="d-block m-t-30"><b>Con el sidebar oscuro</b></li>
+            <li class="d-block m-t-30"><b>{{ "SETTINGS.THEME.SIDEBARDARK" | translate }}</b></li>
             <li><a (click)="changeTheme('default-dark')" data-theme="default-dark" class="selector default-dark-theme">7</a></li>
             <li><a (click)="changeTheme('green-dark')" data-theme="green-dark" class="selector green-dark-theme">8</a></li>
             <li><a (click)="changeTheme('red-dark')" data-theme="red-dark" class="selector red-dark-theme">9</a></li>

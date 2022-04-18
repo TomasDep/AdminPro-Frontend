@@ -1,0 +1,48 @@
+{
+  "BREADCRUMBS": {
+    "HOME": "Home",
+    "PAGES": "Pages",
+    "DASHBOARD": "Dashboard"
+  },
+  "HEADER": {
+    "PROFILE": "My Profile",
+    "ACOUNT": "Account Setting",
+    "LOGOUT": "Logout",
+    "LANG": {
+      "ENGLISH": "English",
+      "SPAIN": "Spanish"
+    }
+  },
+  "SIDEBAR": {
+    "PROFILE": "My Profile",
+    "ACOUNT": "Account Setting",
+    "LOGOUT": "Logout"
+  },
+  "SETTINGS": {
+    "THEME": {
+      "TITLE": "Select Theme",
+      "SIDEBARLIGHT": "With the light sidebar",
+      "SIDEBARDARK": "With the dark sidebar"
+    }
+  },
+  "SEARCH": {
+    "MEDIC": {
+      "TITLE": "Doctor",
+      "NOTFOUD": "There are no doctors with that term",
+      "AVATAR": "image",
+      "NAME": "Name"
+    },
+    "HOSPITAL": {
+      "TITLE": "Hospitals",
+      "NOTFOUD": "There are no hospitals with that term",
+      "AVATAR": "image",
+      "NAME": "name"
+    },
+    "USER": {
+      "TITLE": "Users",
+      "NOTFOUD": "There are no users  with that term",
+      "AVATAR": "image",
+      "NAME": "name"
+    }
+  }
+}

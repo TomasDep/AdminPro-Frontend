@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { ActivationEnd, Router } from '@angular/router';
 import { filter, map, Subscription, Observable } from 'rxjs';
 
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-breadcrumbs',
   templateUrl: './breadcrumbs.component.html',
@@ -12,7 +13,10 @@ export class BreadcrumbsComponent implements OnDestroy{
   public titulo: string = '';
   public tituloSub$: Subscription = new Subscription();
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    public translate: TranslateService
+  ) {
     this.tituloSub$ = this.getDataRutas()
                         .subscribe(({titulo}) => {
                           this.titulo = titulo;

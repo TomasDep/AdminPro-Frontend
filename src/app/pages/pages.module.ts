@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { ComponentsModule } from '@components/components.module';
 import { SharedModule } from '@shared/shared.module';
 import { PipesModule } from '@pipes/pipes.module';
+import { TranslateModule } from '@ngx-translate/core';
 import { 
   AccountSettingsComponent,
   BusquedaComponent,
@@ -39,7 +40,8 @@ import {
     RouterModule,
     ComponentsModule,
     ReactiveFormsModule,
-    PipesModule
+    PipesModule,
+    TranslateModule
   ],
   exports: [
     DashboardComponent,

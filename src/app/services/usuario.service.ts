@@ -49,6 +49,12 @@ export class UsuarioService {
     sessionStorage.setItem('menu', JSON.stringify(menu));
   }
 
+  setLang(): void {
+    if (!localStorage.getItem('lang')) {
+      localStorage.setItem('lang', 'en');
+    }
+  }
+
   validarToken(): Observable<boolean> {
     return this.http.get(`${ baseUrl }/login/renew`, this.headers)
                     .pipe(
@@ -66,7 +72,8 @@ export class UsuarioService {
     return this.http.post(`${ baseUrl }/usuarios`, formData)
                 .pipe(
                   tap((resp: any) => {
-                    this.setStorage(resp.token, resp.menu)
+                    this.setStorage(resp.token, resp.menu);
+                    this.setLang();
                   })
                 );
   }
@@ -86,7 +93,8 @@ export class UsuarioService {
     return this.http.post(`${ baseUrl }/login`, formData)
                 .pipe(
                   tap((resp: any) => {
-                    this.setStorage(resp.token, resp.menu)
+                    this.setStorage(resp.token, resp.menu);
+                    this.setLang();
                   })
                 );
   }
@@ -95,7 +103,8 @@ export class UsuarioService {
     return this.http.post(`${ baseUrl }/login/google`, { token })
                 .pipe(
                   tap((resp: any) => {
-                    this.setStorage(resp.token, resp.menu)
+                    this.setStorage(resp.token, resp.menu);
+                    this.setLang();
                   })
                 );
   }
