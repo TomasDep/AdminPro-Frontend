@@ -1,0 +1,11 @@
+.list {
+  list-style-type: none;
+}
+
+.list-left {
+  float: left;
+}
+
+.list li {
+  padding-left: 20px;
+}

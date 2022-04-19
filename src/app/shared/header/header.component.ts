@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Usuario } from '@models/usuario.model';
 import { TranslateService } from '@ngx-translate/core';
+
+import { Usuario } from '@models/usuario.model';
 import { UsuarioService } from '@services/usuario.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +15,7 @@ import { UsuarioService } from '@services/usuario.service';
 export class HeaderComponent implements OnInit {
   public usuario: Usuario;
   public lang: string = 'flag-icon flag-icon-us';
+  public placeholderSearch: string = '';
   
   constructor(
     private usuarioService: UsuarioService,
@@ -23,11 +26,9 @@ export class HeaderComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    if (localStorage.getItem('lang') === 'en') {
-      this.setLang('en');
-    } else {
-      this.setLang('es');
-    }
+    this.translate.get('SEARCH.PLACEHOLDER').subscribe(resp => {
+      this.placeholderSearch = resp;
+    });
   }
 
   logout(): void {
@@ -39,18 +40,6 @@ export class HeaderComponent implements OnInit {
       this.router.navigateByUrl('dashboard');
     } else {
       this.router.navigateByUrl(`/dashboard/busqueda/${ termino }`);
-    }
-  }
-
-  setLang(value: string): string {
-    if (value === 'en') {
-      this.translate.use(value);
-      localStorage.setItem('lang', value);
-      return this.lang = 'flag-icon flag-icon-us';
-    } else {
-      this.translate.use(value);
-      localStorage.setItem('lang', value);
-      return this.lang = 'flag-icon flag-icon-es';
     }
   }
 }

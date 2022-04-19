@@ -25,4 +25,25 @@
       </div>
     </div>
   </div>
+  <div class="col-5">
+    <div class="card">
+      <div class="card-body">
+        <h4>{{ "SETTINGS.LANG.TITLE" | translate}}</h4>
+        <div class="r-panel-body">
+          <ul class="m-t-20 list">
+            <li class="list-left">
+              <a class="pointer" (click)="changeLang('es')">
+                <i class="flag-icon flag-icon-es fa-3x"></i> 
+              </a>
+            </li>
+            <li class="list-left">
+              <a class="pointer" (click)="changeLang('en')">
+                <i class="flag-icon flag-icon-us fa-3x"></i> 
+              </a> 
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
