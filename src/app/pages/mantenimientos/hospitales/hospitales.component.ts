@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
+import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 
 import { Hospital } from '@models/hospital.model';
@@ -17,17 +18,25 @@ import {
 })
 export class HospitalesComponent implements OnInit, OnDestroy {
   private tipo: string = 'hospitales';
-  public imgSubs: Subscription =  new Subscription();
-  public hospitales: Hospital[] = [];
-  public hospitalesTemp: Hospital[] = [];
+  private update: string = '';
+  private delete: string = '';
+  private createTitle: string = '';
+  private createText: string = '';
+  private createPlaceholder: string = '';
+  public placeholderSearch: string = '';
+  public placeholderName: string = '';
   public cargando: boolean = true;
   public desde: number = 0;
   public totalHospitales: number = 0;
+  public imgSubs: Subscription =  new Subscription();
+  public hospitales: Hospital[] = [];
+  public hospitalesTemp: Hospital[] = [];
 
   constructor(
     private hospitalService: HospitalService, 
     private modalImagenService: ModalImagenService,
-    private busquedaService: BusquedaService
+    private busquedaService: BusquedaService,
+    public translate: TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -36,6 +45,16 @@ export class HospitalesComponent implements OnInit, OnDestroy {
     this.imgSubs = this.modalImagenService.nuevaImagen
                         .pipe(delay(300))
                         .subscribe(img => this.cargarHospitales());
+
+    this.translate.get('MAINTAINERS.HOSPITALS').subscribe(resp => {
+      this.placeholderName = resp.PLACEHOLDER.NAME;
+      this.placeholderSearch = resp.PLACEHOLDER.SEARCH;
+      this.update = resp.ALERTS.UPDATE;
+      this.delete = resp.ALERTS.DELETE;
+      this.createTitle = resp.ALERTS.CREATE.TITLE;
+      this.createText = resp.ALERTS.CREATE.TEXT;
+      this.createPlaceholder = resp.ALERTS.CREATE.PLACEHOLDER.NAME;
+    });
   }
   
   ngOnDestroy(): void {
@@ -67,7 +86,7 @@ export class HospitalesComponent implements OnInit, OnDestroy {
   editarHospital(hospital: Hospital): void {
     this.hospitalService.actualizarHospitales(hospital._id!, hospital.nombre)
         .subscribe(resp => {
-          Swal.fire('Actualizado', hospital.nombre, 'success');
+          Swal.fire(this.update, hospital.nombre, 'success');
         });
   }
 
@@ -75,18 +94,18 @@ export class HospitalesComponent implements OnInit, OnDestroy {
     this.hospitalService.borrarHospitales(hospital._id!)
         .subscribe(resp => {
           this.cargarHospitales();
-          Swal.fire('Borrado', hospital.nombre, 'success');
+          Swal.fire(this.delete, hospital.nombre, 'success');
         });
   }
 
   async crearHospital(): Promise<void> {
     const { value = '' } = await Swal.fire<string>({
       input: 'text',
-      title: 'Nuevo hospital',
-      text: 'Ingrese el nombre del nuevo hospital',
-      inputPlaceholder: 'Nombre del Hospital',
+      title: this.createTitle,
+      text: this.createText,
+      inputPlaceholder: this.createPlaceholder,
       showCancelButton: true
-    })
+    });
     
     if (value?.trim().length! > 0) {
       this.hospitalService.crearHospitales(value!).subscribe((resp: any) => {

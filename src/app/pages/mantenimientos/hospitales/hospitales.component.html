@@ -4,7 +4,7 @@
       <div class="card-body">
         <input type="text"
                class="form-control"
-               placeholder="Buscar hospitales"
+               [placeholder]="placeholderSearch"
                #txtTermino
                (keyup)="buscar(txtTermino.value)"
         />
@@ -16,9 +16,9 @@
 <div class="row animated fadeIn fast" *ngIf="cargando">
   <div class="col-12">
     <div class="alert alert-info text-center">
-      <h4 class="alert-heading">Cargando...</h4>
+      <h4 class="alert-heading">{{ "MAINTAINERS.LOADING" | translate }}...</h4>
       <i class="fa fa-spin fa-refresh fa-2x"></i>
-      <p class="mb-0">Por favor espere</p>
+      <p class="mb-0">{{ "MAINTAINERS.WAIT" | translate }}</p>
     </div>
   </div>
 </div>
@@ -29,8 +29,8 @@
       <div class="card-body">
         <div class="row">
           <div class="col-8">
-            <h4 class="card-title">Hospitales ({{ totalHospitales }})</h4>
-            <h6 class="card-subtitle">Hospitales registrados en la aplicación</h6>
+            <h4 class="card-title">{{ "MAINTAINERS.HOSPITALS.CARDTITLE" | translate }} ({{ totalHospitales }})</h4>
+            <h6 class="card-subtitle">{{ "MAINTAINERS.HOSPITALS.CARDSUBTITLE" | translate }}</h6>
           </div>
           <div class="col-4">
             <div class="text-right">
@@ -38,7 +38,7 @@
                       (click)="crearHospital()"
               >
                 <i class="fa fa-hospital-o"></i>
-                Crear hospital
+                {{ "MAINTAINERS.HOSPITALS.CREATE" | translate }}
               </button>
             </div>
           </div>
@@ -47,9 +47,9 @@
           <table class="table table-bordered">
             <thead>
               <tr>
-                <th>Foto</th>
-                <th>Nombre</th>
-                <th class="text-nowrap">Acciones</th>
+                <th>{{ "MAINTAINERS.HOSPITALS.PHOTO" | translate }}</th>
+                <th>{{ "MAINTAINERS.HOSPITALS.NAME" | translate }}</th>
+                <th class="text-nowrap">{{ "MAINTAINERS.HOSPITALS.ACTIONS" | translate }}</th>
               </tr>
             </thead>
             <tbody>
@@ -64,7 +64,7 @@
                 <td>
                   <input type="text" 
                          class="form-control" 
-                         placeholder="Nombre del hospital" 
+                         [placeholder]="" 
                          [(ngModel)]="hospital.nombre" 
                   />
                 </td>
@@ -89,9 +89,9 @@
           </table>
         </div>
         <div *ngIf="txtTermino.value.length === 0">
-          <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anterior</button>
+          <button (click)="cambiarPagina(-5)" class="btn btn-secondary">{{ "MAINTAINERS.PREVIOUS" | translate }}</button>
           &nbsp;
-          <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguiente</button>
+          <button (click)="cambiarPagina(5)" class="btn btn-secondary">{{ "MAINTAINERS.NEXT" | translate }}</button>
         </div>
       </div>
     </div>

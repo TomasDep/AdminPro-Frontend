@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { TranslateService } from '@ngx-translate/core';
+
 import { HospitalService, MedicoService, UsuarioService } from '@services/index';
 
 @Component({
@@ -15,7 +17,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private hospitalService: HospitalService,
-    private medicoService: MedicoService
+    private medicoService: MedicoService,
+    public translate: TranslateService
   ) { }
 
   ngOnInit(): void {
