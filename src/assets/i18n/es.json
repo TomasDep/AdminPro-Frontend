@@ -20,12 +20,20 @@
   },
   "SETTINGS": {
     "THEME": {
-      "TITLE": "Seleccione el Tema",
+      "TITLE": "Seleccionar el Tema",
       "SIDEBARLIGHT": "Con el sidebar claro",
       "SIDEBARDARK": "Con el sidebar oscuro"
+    },
+    "LANG": {
+      "TITLE": "Seleccionar idioma",
+      "OPTION": {
+        "SPAIN": "Español",
+        "ENGLISH": "Ingles"
+      }
     }
   },
   "SEARCH": {
+    "PLACEHOLDER": "Buscar medico/hospital/usuario",
     "MEDIC": {
       "TITLE": "Médico",
       "NOTFOUD": "No hay médicos con ese término",
@@ -43,6 +51,42 @@
       "NOTFOUD": "No hay usuarios con ese término",
       "AVATAR": "Imagen",
       "NAME": "Nombre"
+    }
+  },
+  "DASHBOARD": {
+    "TOTAL": {
+      "USERS": "Total usuarios",
+      "HOSPITALS": "Total hospitales",
+      "MEDICS": "Total medicos"
+    }
+  },
+  "MAINTAINERS": {
+    "LOADING": "Cargando",
+    "WAIT": "Por favor espere",
+    "PREVIOUS": "Anterior",
+    "NEXT": "Siguiente",
+    "HOSPITALS": {
+      "CARDTITLE": "Hospitales",
+      "CARDSUBTITLE": "Hospitales registrados en la aplicación",
+      "CREATE": "Crear hospital",
+      "PHOTO": "Foto",
+      "NAME": "Nombre",
+      "ACTIONS": "Acciones",
+      "PLACEHOLDER": {
+        "SEARCH": "Buscar hospitales",
+        "NAME": "Nombre del hospital"
+      },
+      "ALERTS": {
+        "UPDATE": "Actualizado",
+        "DELETE": "Eliminado",
+        "CREATE": {
+          "TITLE": "Nuevo hospital",
+          "TEXT": "Ingrese el nombre del nuevo hospital",
+          "PLACEHOLDER": {
+            "NAME": "Nombre del hospital"
+          }
+        }
+      }
     }
   }
 }

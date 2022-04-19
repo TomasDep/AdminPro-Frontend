@@ -23,9 +23,17 @@
       "TITLE": "Select Theme",
       "SIDEBARLIGHT": "With the light sidebar",
       "SIDEBARDARK": "With the dark sidebar"
+    },
+    "LANG": {
+      "TITLE": "Select language ",
+      "OPTION": {
+        "SPAIN": "Spanish",
+        "ENGLISH": "English"
+      }
     }
   },
   "SEARCH": {
+    "PLACEHOLDER": "Search doctor/hospital/user",
     "MEDIC": {
       "TITLE": "Doctor",
       "NOTFOUD": "There are no doctors with that term",
@@ -43,6 +51,42 @@
       "NOTFOUD": "There are no users  with that term",
       "AVATAR": "image",
       "NAME": "name"
+    }
+  },
+  "DASHBOARD": {
+    "TOTAL": {
+      "USERS": "All users",
+      "HOSPITALS": "All hospitals",
+      "MEDICS": "All the doctors"
+    }
+  },
+  "MAINTAINERS": {
+    "LOADING": "Loading",
+    "WAIT": "Please wait",
+    "PREVIOUS": "Previous",
+    "NEXT": "Next",
+    "HOSPITALS": {
+      "CARDTITLE": "Hospitals",
+      "CARDSUBTITLE": "hospitals registered in the application",
+      "CREATE": "Create hospital",
+      "PHOTO": "Photo",
+      "NAME": "Name",
+      "ACTIONS": "Actions",
+      "PLACEHOLDER": {
+        "SEARCH": "Find hospital",
+        "NAME": "Hospital name"
+      },
+      "ALERTS": {
+        "UPDATE": "Update",
+        "DELETE": "Erased",
+        "CREATE": {
+          "TITLE": "New hospital",
+          "TEXT": "Enter the name of the new hospital",
+          "PLACEHOLDER": {
+            "NAME": "Hospital name"
+          }
+        }
+      }
     }
   }
 }
