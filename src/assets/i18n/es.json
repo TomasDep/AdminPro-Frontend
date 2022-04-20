@@ -87,6 +87,148 @@
           }
         }
       }
+    },
+    "MEDICS": {
+      "CARDTITLE": "Medicos",
+      "CARDSUBTITLE": "Medicos registrados en la aplicación",
+      "CREATE": "Crear medico",
+      "PHOTO": "Foto",
+      "NAME": "Nombre",
+      "ACTIONS": "Acciones",
+      "PLACEHOLDER": {
+        "SEARCH": "Buscar medicos"
+      },
+      "ALERTS": {
+        "UPDATE": "Actualizado",
+        "DELETE": {
+          "TITLE": "¿Borrar medico?",
+          "TEXT": "Esta seguro de borrar a",
+          "BUTTON": {
+            "CONFIRM": "Si, borralo",
+            "CANCEL": "Cancelar"
+          },
+          "SWALDELETE": {
+            "TITLE": "Borrado!",
+            "TEXT": "Se ha borrado satisfactoriamente al medico"
+          }
+        },
+        "CREATE": {
+          "TITLE": "Nuevo hospital",
+          "TEXT": "Ingrese el nombre del nuevo hospital",
+          "PLACEHOLDER": {
+            "NAME": "Nombre del hospital"
+          }
+        }
+      },
+      "MEDIC": {
+        "TITLE": "Médico",
+        "SUBTITLE": "Actualizar información",
+        "FORM": {
+          "PHOTO": "Fotografia",
+          "NAME": "Nombre",
+          "HOSPITAL": "Hospital",
+          "SELECT": "Seleccione hospital",
+          "SAVE": "Guardar cambios",
+          "PLACEHOLDER": {
+            "NAME": "Nombre del medico"
+          }
+        },
+        "SWAL": {
+          "UPDATE": {
+            "TITLE": "Actualizado",
+            "TEXT": "El medico param se ha actualizado correctamente"
+          },
+          "CREATE": {
+            "TITLE": "Creado",
+            "TEXT": "El medico param se ha creado correctamennte"
+          }
+        },
+        "IMAGE": {
+          "TITLE": "Hospital"
+        }
+      }
+    },
+    "USERS": {
+      "TITLE": "Total de usuarios",
+      "SUBTITLE": "Usuarios registrados en la aplicación",
+      "AVATAR": "Avatar",
+      "EMAIL": "Correo",
+      "NAME": "Nombre",
+      "ROLE": "Rol",
+      "AUTH": "Autentificación",
+      "ACTIONS": "Acciones",
+      "SELECT": {
+        "ADMIN": "Administrador",
+        "USER": "Usuario"
+      },
+      "ROLEAUTH": {
+        "GOOGLE": "Google",
+        "NORMAL": "Normal"
+      },
+      "PLACEHOLDER": {
+        "SEARCH": "Buscar usuarios"
+      },
+      "SWAL": {
+        "ERROR": {
+          "TITLE": "Error",
+          "TEXT": "No puede borrarse a sí mismo"
+        },
+        "DELETE": {
+          "TITLE": "¿Borrar usuario?",
+          "TEXT": "Esta seguro de borrar a param",
+          "BUTTON": {
+            "CONFIRM": "Si, borralo",
+            "CANCEL": "Cancelar"
+          },
+          "SUCCESS": {
+            "TITLE": "Borrado!!!",
+            "TEXT": "El usuario param a sido borrado correctamennte"
+          }
+        }
+      }
+    }
+  },
+  "PERFIL": {
+    "TITLE": "Mi perfil de usuario",
+    "SUBTITLE": "Ajustes",
+    "FORM": {
+      "LABEL": {
+        "NAME": "Nombre de usuario",
+        "EMAIL": "Correo electronico"
+      },
+      "PLACEHOLDER": {
+        "NAME": "Nombre de usuario",
+        "EMAIL": "Correo electronico"
+      },
+      "BUTTON": {
+        "SAVE": "Guardar cambios"
+      }
+    },
+    "SWAL": {
+      "UPDATE": {
+        "TITLE": "Guardado",
+        "TEXT": "Los cambios fueron guardados correctamente"
+      },
+      "Error": {
+        "TITLE": "Error"
+      },
+      "IMAGE": {
+        "UPDATE": {
+          "TITLE": "Guardado",
+          "TEXT": "Imagen del usuario actualizada"
+        },
+        "ERROR": {
+          "TITLE": "Error",
+          "TEXT": "No se pudo subir la imagen"
+        }
+      }
+    },
+    "IMAGE": {
+      "TITLE": "Avatar",
+      "SUBTITLE": "Imagen del usuario",
+      "BUTTON": {
+        "SAVE": "Guardar imagen"
+      }
     }
   }
 }

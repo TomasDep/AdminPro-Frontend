@@ -87,6 +87,141 @@
           }
         }
       }
+    },
+    "MEDICS": {
+      "CARDTITLE": "Doctors",
+      "CARDSUBTITLE": "Doctors registered in the application",
+      "CREATE": "Create doctor",
+      "PHOTO": "Photo",
+      "NAME": "Name",
+      "ACTIONS": "Actions",
+      "PLACEHOLDER": {
+        "SEARCH": "Find doctors"
+      },
+      "ALERTS": {
+        "UPDATE": "Updated",
+        "DELETE": {
+          "TITLE": "Delete doctor?",
+          "TEXT": "Are you sure you want to delete",
+          "BUTTON": {
+            "CONFIRM": "Yes, delete it",
+            "CANCEL": "Cancel"
+          },
+          "SWALDELETE": {
+            "TITLE": "Erased!!",
+            "TEXT": "The doctor has been successfully deleted"
+          }
+        }
+      },
+      "MEDIC": {
+        "TITLE": "Doctor",
+        "SUBTITLE": "Update information",
+        "FORM": {
+          "PHOTO": "Photo",
+          "NAME": "Name",
+          "HOSPITAL": "Hospital",
+          "SELECT": "Select hospital",
+          "SAVE": "Save Changes",
+          "PLACEHOLDER": {
+            "NAME": "Name of the doctor"
+          }
+        },
+        "SWAL": {
+          "UPDATE": {
+            "TITLE": "Updated",
+            "TEXT": "The doctor param has been updated successfully"
+          },
+          "CREATE": {
+            "TITLE": "Created",
+            "TEXT": "The doctor param has been created correctly"
+          }
+        },
+        "IMAGE": {
+          "TITLE": "Hospital"
+        }
+      }
+    },
+    "USERS": {
+      "TITLE": "Total Users",
+      "SUBTITLE": "Users registered in the application",
+      "AVATAR": "Avatar",
+      "EMAIL": "Email",
+      "NAME": "Name",
+      "ROLE": "Role",
+      "AUTH": "Auth",
+      "ACTIONS": "Actions",
+      "SELECT": {
+        "ADMIN": "Admin",
+        "USER": "User"
+      },
+      "ROLEAUTH": {
+        "GOOGLE": "Google",
+        "NORMAL": "Normal"
+      },
+      "PLACEHOLDER": {
+        "SEARCH": "Search users"
+      },
+      "SWAL": {
+        "ERROR": {
+          "TITLE": "Error",
+          "TEXT": "Can't erase itself"
+        },
+        "DELETE": {
+          "TITLE": "Delete user?",
+          "TEXT": "Are you sure to delete param",
+          "BUTTON": {
+            "CONFIRM": "Yes, delete it",
+            "CANCEL": "Cancel"
+          },
+          "SUCCESS": {
+            "TITLE": "Erased!!!",
+            "TEXT": "The user param has been deleted successfully"
+          }
+        }
+      }
+    }
+  },
+  "PERFIL": {
+    "TITLE": "My user profile",
+    "SUBTITLE": "Settings",
+    "FORM": {
+      "LABEL": {
+        "NAME": "Username",
+        "EMAIL": "Email"
+      },
+      "PLACEHOLDER": {
+        "NAME": "Username",
+        "EMAIL": "Email"
+      },
+      "BUTTON": {
+        "SAVE": "Save Changes"
+      }
+    },
+    "SWAL": {
+      "UPDATE": {
+        "TITLE": "Saved",
+        "TEXT": "The changes were saved correctly"
+      },
+      "Error": {
+        "TITLE": "Error"
+      },
+      "IMAGE": {
+        "UPDATE": {
+          "TITLE": "Saved",
+          "TEXT": "Updated user image"
+        },
+        "ERROR": {
+          "TITLE": "Error",
+          "TEXT": "The image could not be uploaded"
+        }
+      }
+    },
+    "IMAGE": {
+      "TITLE": "Avatar",
+      "SUBTITLE": "User Image",
+      "BUTTON": {
+        "SAVE": "Save Picture"
+      }
     }
   }
 }
