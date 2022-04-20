@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 
 import { Usuario } from '@models/usuario.model';
@@ -12,15 +13,18 @@ import { UsuarioService, FileUploadsService } from '@services/index';
   styleUrls: ['./perfil.component.css']
 })
 export class PerfilComponent implements OnInit {
+  public imgTemp: any = '';
+  public placeholderName: string = '';
+  public placeholderEmail: string = '';
   public perfilForm!: FormGroup;
   public usuario: Usuario;
   public imagenSubir!: File;
-  public imgTemp: any = '';
 
   constructor(
     private formBuilder: FormBuilder, 
     private usuarioService: UsuarioService,
-    private FileUploadsService: FileUploadsService
+    private FileUploadsService: FileUploadsService,
+    public translate: TranslateService
   ) { 
     this.usuario = this.usuarioService.usuario;
   }
@@ -30,17 +34,28 @@ export class PerfilComponent implements OnInit {
       nombre: [this.usuario.nombre, Validators.required],
       email: [this.usuario.email, [Validators.required, Validators.email]]
     });
+    
+    this.translate.get("PERFIL.FORM.PLACEHOLDER").subscribe(resp => {
+      this.placeholderName = resp.NAME;
+      this.placeholderEmail = resp.EMAIL;
+    });
   }
 
   actualizarPerfil(): void {
-    console.log(this.perfilForm.value);
-    this.usuarioService.actualizarPerfil(this.perfilForm.value).subscribe(resp => {
-      const { nombre, email } = this.perfilForm.value;
-      this.usuario.nombre = nombre;
-      this.usuario.email = email;
-      Swal.fire('Guardado', 'Cambios fueron guardados', 'success');
-    }, (error) => {
-      Swal.fire('Error', error.error.message, 'error');
+    this.usuarioService.actualizarPerfil(this.perfilForm.value).subscribe({
+      next: resp => {
+        const { nombre, email } = this.perfilForm.value;
+        this.usuario.nombre = nombre;
+        this.usuario.email = email;
+        this.translate.get("PERFIL.SWAL.UPDATE").subscribe(resp => {
+          Swal.fire(resp.TITLE, resp.TEXT, 'success');
+        });
+      },
+      error: error => {
+        this.translate.get("PERFIL.SWAL.ERROR").subscribe(resp => {
+          Swal.fire(resp.TITLE, error.error.message, 'error');
+        });
+      }
     });
   }
 
@@ -67,10 +82,14 @@ export class PerfilComponent implements OnInit {
         .actualizarFoto(this.imagenSubir, 'usuarios', this.usuario.uid!)
         .then(img => {
           this.usuario.img = img;
-          Swal.fire('Guardado', 'Imagen del usuario actualizada', 'success');
+          this.translate.get("PERFIL.SWAL.IMAGE.UPDATE").subscribe(resp => {
+            Swal.fire(resp.TITLE, resp.TEXT, 'success');
+          });
         }).catch(error => {
           console.log(error);
-          Swal.fire('Error','No se pudo subir la imagen', 'error');
+          this.translate.get("PERFIL.SWAL.IMAGE.ERROR").subscribe(resp => {
+            Swal.fire(resp.TITLE, resp.TEXT, 'error');
+          });
         });
   }
 }

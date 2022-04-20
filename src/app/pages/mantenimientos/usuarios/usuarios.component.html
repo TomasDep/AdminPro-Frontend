@@ -4,7 +4,7 @@
       <div class="card-body">
         <input type="text" 
                class="form-control" 
-               placeholder="Buscar usuarios" 
+               [placeholder]="placeholderSearch" 
                (keyup)="buscar(txtTermino.value)"
                #txtTermino
         />
@@ -16,9 +16,9 @@
 <div *ngIf="cargando" class="row animated fadeIn fast">
   <div class="col-12">
     <div class="alert alert-info text-center">
-      <h4 class="alert-heading">Cargando...</h4>
+      <h4 class="alert-heading">{{ "MAINTAINERS.LOADING" | translate }}...</h4>
       <i class="fa fa-spin fa-refresh fa-2x"></i>
-      <p class="mb-0">Por favor espere</p>
+      <p class="mb-0">{{ "MAINTAINERS.WAIT" | translate }}</p>
     </div>
   </div>
 </div>
@@ -27,18 +27,18 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Total de Usuarios ({{ totalUsuarios }})</h4>
-        <h6 class="card-subtitle">Usuarios registrados en la aplicación</h6>
+        <h4 class="card-title">{{ "MAINTAINERS.USERS.TITLE" | translate }} ({{ totalUsuarios }})</h4>
+        <h6 class="card-subtitle">{{ "MAINTAINERS.USERS.SUBTITLE" | translate }}</h6>
         <div class="table-responsive">
           <table class="table table-bordered">
             <thead>
               <tr>
-                <th class="w100">Avatar</th>
-                <th>Correo</th>
-                <th>Nombre</th>
-                <th class="w140">Role</th>
-                <th class="w100">Auth</th>
-                <th class="text-nowrap w100">Acciones</th>
+                <th class="w100">{{ "MAINTAINERS.USERS.AVATAR" | translate }}</th>
+                <th>{{ "MAINTAINERS.USERS.EMAIL" | translate }}</th>
+                <th>{{ "MAINTAINERS.USERS.NAME" | translate }}</th>
+                <th class="w140">{{ "MAINTAINERS.USERS.ROLE" | translate }}</th>
+                <th class="w100">{{ "MAINTAINERS.USERS.AUTH" | translate }}</th>
+                <th class="text-nowrap w100">{{ "MAINTAINERS.USERS.AVATAR" | translate }}</th>
               </tr>
             </thead>
             <tbody>
@@ -54,13 +54,13 @@
                 <td>{{ usuario.nombre }}</td>
                 <td>
                   <select [(ngModel)]="usuario.role" (change)="cambiarRole(usuario)" class="form-control">
-                    <option value="ADMIN_ROLE">Admin</option>
-                    <option value="USER_ROLE">User</option>
+                    <option value="ADMIN_ROLE">{{ "MAINTAINERS.USERS.SELECT.ADMIN" | translate }}</option>
+                    <option value="USER_ROLE">{{ "MAINTAINERS.USERS.SELECT.USER" | translate }}</option>
                   </select>
                 </td>
                 <td>
-                  <span *ngIf="usuario.google" class="label label-danger">Google</span>
-                  <span *ngIf="!usuario.google" class="label label-info">Normal</span>
+                  <span *ngIf="usuario.google" class="label label-danger">{{ "MAINTAINERS.USERS.ROLEAUTH.GOOGLE" | translate }}</span>
+                  <span *ngIf="!usuario.google" class="label label-info">{{ "MAINTAINERS.USERS.ROLEAUTH.NORMAL" | translate }}</span>
                 </td>
                 <td class="text-nowrap text-center">
                   <a (click)="eliminarUsuario(usuario)" 
@@ -76,9 +76,9 @@
           </table>
         </div>
         <div *ngIf="txtTermino.value.length === 0">
-          <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anterior</button>
+          <button (click)="cambiarPagina(-5)" class="btn btn-secondary">{{ "MAINTAINERS.PREVIOUS" | translate }}</button>
           &nbsp;
-          <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguiente</button>
+          <button (click)="cambiarPagina(5)" class="btn btn-secondary">{{ "MAINTAINERS.NEXT" | translate }}</button>
         </div>
       </div>
     </div>

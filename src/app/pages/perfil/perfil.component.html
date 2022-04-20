@@ -2,29 +2,29 @@
   <div class="col-md-6">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Mi perfil de usuario</h4>
-        <h6 class="card-subtitle">Ajustes</h6>
+        <h4 class="card-title">{{ "PERFIL.TITLE" | translate }}</h4>
+        <h6 class="card-subtitle">{{ "PERFIL.SUBTITLE" | translate }}</h6>
         <form class="form p-t-20" [formGroup]="perfilForm" (ngSubmit)="actualizarPerfil()">
           <div class="form-group">
-            <label for="exampleInputuname">User Name</label>
+            <label for="exampleInputuname">{{ "PERFIL.FORM.LABEL.NAME" | translate }}</label>
             <div class="input-group">
               <div class="input-group-addon"><i class="ti-user"></i></div>
               <input type="text" 
                      class="form-control" 
                      id="exampleInputuname"
-                     placeholder="Nombre de usuario" 
+                     [placeholder]="placeholderName" 
                      formControlName="nombre"
               >
             </div>
           </div>
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
+            <label for="exampleInputEmail1">{{ "PERFIL.FORM.LABEL.EMAIL" | translate }}</label>
             <div class="input-group">
               <div class="input-group-addon"><i class="ti-email"></i></div>
               <input type="email" 
                      class="form-control" 
                      id="exampleInputEmail1" 
-                     placeholder="Email"
+                     [placeholder]="placeholderEmail"
                      formControlName="email"
                      [readonly]="usuario.google"
               >
@@ -32,7 +32,7 @@
           </div>
           <button type="submit" class="btn btn-success btn-block waves-effect waves-light m-r-10" [disabled]="perfilForm.invalid">
             <i class="fa fa-save"></i>
-            Guardar cambios
+            {{ "PERFIL.FORM.BUTTON.SAVE" | translate }}
           </button>
         </form>
       </div>
@@ -42,8 +42,8 @@
   <div class="col-md-6">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Avatar</h4>
-        <h6 class="card-subtitle">Imagen de usuario</h6>
+        <h4 class="card-title">{{ "PERFIL.IMAGE.TITLE" | translate }}</h4>
+        <h6 class="card-subtitle">{{ "PERFIL.IMAGE.SUBTITLE" | translate }}</h6>
         <div class="text-center mb-2">
           <img *ngIf="!imgTemp" [src]="usuario.imagenUrl" class="img-avatar" />
           <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar" />
@@ -56,7 +56,7 @@
                 (click)="subirImagen()"
         >
           <i class="fa fa-save"></i>
-          Cambiar imagen
+          {{ "PERFIL.IMAGE.BUTTON.SAVE" | translate }}
         </button>
       </div>
     </div>

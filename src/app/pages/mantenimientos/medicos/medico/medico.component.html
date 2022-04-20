@@ -2,13 +2,13 @@
   <div class="col-6">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Médico</h4>
-        <h6 class="card-subtitle">Actualizar informacion</h6>
+        <h4 class="card-title">{{ "MAINTAINERS.MEDICS.MEDIC.TITLE" | translate }}</h4>
+        <h6 class="card-subtitle">{{ "MAINTAINERS.MEDICS.MEDIC.SUBTITLE" | translate }}</h6>
         <form class="form-horizontal p-t-20" 
               [formGroup]="medicoForm"
               (ngSubmit)="guardarMedico()">
           <div *ngIf="medicoSeleccionado" class="form-group row">
-            <label for="exampleInputuname3" class="col-sm-3 control-label">Fotografia</label>
+            <label for="exampleInputuname3" class="col-sm-3 control-label">{{ "MAINTAINERS.MEDICS.MEDIC.FORM.PHOTO" | translate }}</label>
             <div class="col-sm-9">
               <div class="input-group">
                 <img [src]="medicoSeleccionado.img! | imagen: 'medicos'" 
@@ -20,14 +20,14 @@
           </div>
 
           <div class="form-group row">
-            <label for="exampleInputuname3" class="col-sm-3 control-label">Nombre</label>
+            <label for="exampleInputuname3" class="col-sm-3 control-label">{{ "MAINTAINERS.MEDICS.MEDIC.FORM.NAME" | translate }}</label>
             <div class="col-sm-9">
               <div class="input-group">
                 <div class="input-group-addon"><i class="ti-user"></i></div>
                 <input type="text" 
                        class="form-control" 
                        id="exampleInputuname3" 
-                       placeholder="Nombre del medico"
+                       [placeholder]="placeholderName"
                        formControlName="nombre"
                 />
               </div>
@@ -35,11 +35,11 @@
           </div>
 
           <div class="form-group row">
-            <label for="exampleInputEmail3" class="col-sm-3 control-label">Hospital</label>
+            <label for="exampleInputEmail3" class="col-sm-3 control-label">{{ "MAINTAINERS.MEDICS.MEDIC.FORM.HOSPITAL" | translate }}</label>
             <div class="col-sm-9">
               <div class="input-group">
                 <select class="form-control" formControlName="hospital">
-                  <option value="">Seleccione hospital</option>
+                  <option value="">{{ "MAINTAINERS.MEDICS.MEDIC.FORM.SELECT" | translate }}</option>
                   <option *ngFor="let hospital of hospitales" 
                           [value]="hospital._id"
                   >
@@ -57,7 +57,7 @@
                       [disabled]="medicoForm.invalid"
               >
                 <i class="fa fa-save"></i>
-                Guardar cambios
+                {{ "MAINTAINERS.MEDICS.MEDIC.FORM.SAVE" | translate }}
               </button>
             </div>
           </div>
@@ -69,7 +69,7 @@
   <div class="col-6 animated fadeIn fast" *ngIf="hospitalSeleccionado">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Hospital</h4>
+        <h4 class="card-title">{{ "MAINTAINERS.MEDICS.MEDIC.IMAGE.TITLE" | translate }}</h4>
         <h6 class="card-subtitle">{{ hospitalSeleccionado.nombre }}</h6>
         <img [src]="hospitalSeleccionado.img! | imagen: 'hospitales'" 
              alt="fotografia del medico" 

@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
+import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 
 import { Usuario } from '@models/usuario.model';
@@ -14,17 +15,19 @@ import { UsuarioService, BusquedaService, ModalImagenService } from '@services/i
 })
 export class UsuariosComponent implements OnInit, OnDestroy {
   private tipo: string = 'usuarios';
+  public placeholderSearch: string = '';
+  public cargando: boolean = true;
   public totalUsuarios: number = 0;
+  public desde: number = 0;
   public usuarios: Usuario[] = [];
   public usuariosTemp: Usuario[] = [];
-  public desde: number = 0;
-  public cargando: boolean = true;
   public imgSubs: Subscription = new Subscription();
 
   constructor(
     private usuarioService: UsuarioService, 
     private busquedaService: BusquedaService,
-    private modalImagenService: ModalImagenService
+    private modalImagenService: ModalImagenService,
+    public translate: TranslateService
   ) { }
   
   ngOnInit(): void {
@@ -33,6 +36,10 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     this.imgSubs = this.modalImagenService.nuevaImagen
                         .pipe(delay(300))
                         .subscribe(img => this.cargarUsuarios());
+
+    this.translate.get("MAINTAINERS.USERS.PLACEHOLDER.SEARCH").subscribe((resp: string) => {
+      this.placeholderSearch = resp;      
+    })
   }
   
   ngOnDestroy(): void {
@@ -75,27 +82,40 @@ export class UsuariosComponent implements OnInit, OnDestroy {
 
   eliminarUsuario(usuario: Usuario): any {
     if (usuario.uid === this.usuarioService.uid) {
-      return Swal.fire('Error', 'No puede borrarse a si mismo', 'error');
+      this.translate.get("MAINTAINERS.USERS.SWAL.ERROR").subscribe(resp => {
+        return Swal.fire(resp.TITLE, resp.TEXT, 'error');
+      });
     } else {
-      return Swal.fire({
-        title: '¿Borrar usuario?',
-        text: `Esta seguro de borrar a ${ usuario.nombre }`,
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Si, borrarlo'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.usuarioService.eliminarUsuario(usuario).subscribe(resp => {
-            this.cargarUsuarios();
-            Swal.fire(
-              'Borrado!',
-              `El usuario ${ usuario.nombre } a sido borrado correctamente`,
-              'success'
-            );
-          });
-        }
+      this.translate.get("MAINTAINERS.USERS.SWAL.DELETE").subscribe(resp => {
+        const title: string = resp.TITLE;
+        const confirmButtonText: string = resp.BUTTON.CONFIRM;
+        const cancelButtonText: string = resp.BUTTON.CANCEL;
+        const successTitle: string = resp.SUCCESS.TITLE;
+        let text: string = resp.TEXT;
+        let successText: string = resp.SUCCESS.TEXT;
+        text = text.replace('param', usuario.nombre);
+        successText = successText.replace('param', usuario.nombre);
+        return Swal.fire({
+          title,
+          text,
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText,
+          cancelButtonText
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.usuarioService.eliminarUsuario(usuario).subscribe(resp => {
+              this.cargarUsuarios();
+              Swal.fire(
+                successTitle,
+                successText,
+                'success'
+              );
+            });
+          }
+        });
       });
     }
   }
