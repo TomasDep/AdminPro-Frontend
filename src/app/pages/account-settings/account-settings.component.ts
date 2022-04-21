@@ -30,7 +30,7 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
     this.settingsService.checkCurrentTheme();
     this.translate.use(localStorage.getItem('lang') || 'en');
   }
-
+  
   changeTheme(theme: string): void {
     this.settingsService.changeTheme(theme);
   }
