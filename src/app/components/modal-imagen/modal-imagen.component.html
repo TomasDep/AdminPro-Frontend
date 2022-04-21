@@ -10,7 +10,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="exampleModalLabel1">Cargar Imagen</h4>
+          <h4 class="modal-title" id="exampleModalLabel1">{{ "MODALIMAGEN.TITLE" | translate }}</h4>
           <button type="button" 
                   class="close" 
                   data-dismiss="modal" 
@@ -21,12 +21,19 @@
           </button>
         </div>
         <div class="modal-body">
-          <h3>Seleccione una Imagen</h3>
-          <div class="text-center mb-2">
-            <img *ngIf="!imgTemp" [src]="modalImagenService.img" class="img-avatar" />
-            <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar" />
+          <h3>{{ "MODALIMAGEN.SUBTITLE" | translate }}</h3>
+          <div class="container">
+            <div class="d-flex flex-column">
+              <div class="text-center mb-2">
+                <img *ngIf="!imgTemp" [src]="modalImagenService.img" class="img-avatar" />
+                <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar" />
+              </div>
+              <div id="file" [class]="themeColor" class="pointer">
+                <p id="addImage">{{ "MODALIMAGEN.BUTTON.TEXT" | translate }}</p>
+                <input type="file" id="btnAddImage" (change)="cambiarImagen($event)">
+              </div>
+            </div>
           </div>
-          <input type="file" (change)="cambiarImagen($event)">
         </div>
         <div class="modal-footer">
           <button type="button" 
@@ -34,13 +41,14 @@
                   data-dismiss="modal"
                   (click)="cerrarModal()"
           >
-            Cancelar
+            {{ "MODALIMAGEN.BUTTON.CANCEL" | translate }}
           </button>
           <button type="button" 
                   (click)="subirImagen()"
-                  class="btn btn-primary"
+                  [class]="themeColor"
+                  class="btn"
           >
-            Actualizar Foto
+            {{ "MODALIMAGEN.BUTTON.UPDATE" | translate }}
           </button>
         </div>
       </div>

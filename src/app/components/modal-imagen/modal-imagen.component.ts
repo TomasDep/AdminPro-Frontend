@@ -1,21 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import Swal from 'sweetalert2';
+import { TranslateService } from '@ngx-translate/core';
 
 import { ModalImagenService, FileUploadsService } from '@services/index';
+
 @Component({
   selector: 'app-modal-imagen',
   templateUrl: './modal-imagen.component.html',
   styleUrls: ['./modal-imagen.component.css']
 })
-export class ModalImagenComponent {
+export class ModalImagenComponent implements OnInit {
   public imagenSubir!: File;
   public imgTemp: any = '';
+  public themeColor: string = 'default';
 
   constructor(
+    public translate: TranslateService,
     public modalImagenService: ModalImagenService, 
-    public fileUploadsService: FileUploadsService
+    public fileUploadsService: FileUploadsService,
   ) { }
+  
+  ngOnInit(): void {
+    this.themeColor = localStorage.getItem('themeButton') || 'default';
+  }
 
   cerrarModal(): void {
     this.imgTemp = null;
@@ -47,12 +55,16 @@ export class ModalImagenComponent {
     this.fileUploadsService
         .actualizarFoto(this.imagenSubir, tipo, id)
         .then(img => {
-          Swal.fire('Guardado', 'Imagen del usuario actualizada', 'success');
-          this.modalImagenService.nuevaImagen.emit(img);
-          this.cerrarModal();
+          this.translate.get('MODALIMAGEN.SWAL.SUCCESS').subscribe(resp => {
+            Swal.fire(resp.TITLE, resp.TEXT, 'success');
+            this.modalImagenService.nuevaImagen.emit(img);
+            this.cerrarModal();
+          });
         }).catch(error => {
-          console.log(error);
-          Swal.fire('Error','No se pudo subir la imagen', 'error');
+          this.translate.get('MODALIMAGEN.SWAL.ERROR').subscribe(resp => {
+            console.log(error);
+            Swal.fire(resp.TITLE, resp.TEXT, 'error');
+          });
         });
   }
 }
