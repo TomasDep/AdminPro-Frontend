@@ -223,5 +223,24 @@
         "SAVE": "Save Picture"
       }
     }
+  },
+  "MODALIMAGEN": {
+    "TITLE": "Upload image",
+    "SUBTITLE": "Select Image",
+    "BUTTON": {
+      "TEXT": "Add file",
+      "CANCEL": "Cancel",
+      "UPDATE": "Update Photo"
+    },
+    "SWAL": {
+      "SUCCESS": {
+        "TITLE": "Saved",
+        "TEXT": "Updated user image"
+      },
+      "ERROR": {
+        "TITLE": "Error",
+        "TEXT": "The image could not be uploaded"
+      }
+    }
   }
 }

@@ -230,5 +230,24 @@
         "SAVE": "Guardar imagen"
       }
     }
+  },
+  "MODALIMAGEN": {
+    "TITLE": "Cargar Imagen",
+    "SUBTITLE": "Seleccione una Imagen",
+    "BUTTON": {
+      "TEXT": "Agregar archivo",
+      "CANCEL": "Cancelar",
+      "UPDATE": "Actualizar Foto"
+    },
+    "SWAL": {
+      "SUCCESS": {
+        "TITLE": "Guardado",
+        "TEXT": "Imagen del usuario actualizada"
+      },
+      "ERROR": {
+        "TITLE": "Error",
+        "TEXT": "No se pudo subir la imagen"
+      }
+    }
   }
 }
