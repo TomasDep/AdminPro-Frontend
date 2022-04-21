@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class SettingsService {
   private linkTheme: Element | null = document.querySelector('#theme');
+  private themeColor: string = 'default';
 
   constructor() { 
     const theme: string = localStorage.getItem('theme') || "./assets/css/colors/default-dark.css";
@@ -15,8 +16,15 @@ export class SettingsService {
     const url: string = `./assets/css/colors/${ theme }.css`;
     this.linkTheme?.setAttribute('href', url);
     localStorage.setItem('theme', url);
+    this.changeButtonTheme();
     this.checkCurrentTheme();
   }
+
+  changeButtonTheme(): void {
+    const theme: string = localStorage.getItem('theme') || '';
+    this.themeColor = theme.replace('./assets/css/colors/', '').replace('.css', '');
+    localStorage.setItem('themeButton', this.themeColor);
+  } 
 
   checkCurrentTheme(): void {
     const links: NodeListOf<Element> = document.querySelectorAll('.selector');
