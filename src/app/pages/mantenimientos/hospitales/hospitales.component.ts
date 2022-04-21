@@ -25,6 +25,7 @@ export class HospitalesComponent implements OnInit, OnDestroy {
   private createPlaceholder: string = '';
   public placeholderSearch: string = '';
   public placeholderName: string = '';
+  public themeColor: string = 'default';
   public cargando: boolean = true;
   public desde: number = 0;
   public totalHospitales: number = 0;
@@ -41,6 +42,8 @@ export class HospitalesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.cargarHospitales();
+
+    this.themeColor = localStorage.getItem('themeButton') || 'default';
 
     this.imgSubs = this.modalImagenService.nuevaImagen
                         .pipe(delay(300))

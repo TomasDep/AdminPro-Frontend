@@ -19,6 +19,7 @@ export class PerfilComponent implements OnInit {
   public perfilForm!: FormGroup;
   public usuario: Usuario;
   public imagenSubir!: File;
+  public themeColor: string = '';
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -30,6 +31,7 @@ export class PerfilComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.themeColor = localStorage.getItem('themeButton') || 'default';
     this.perfilForm = this.formBuilder.group({
       nombre: [this.usuario.nombre, Validators.required],
       email: [this.usuario.email, [Validators.required, Validators.email]]
@@ -58,7 +60,7 @@ export class PerfilComponent implements OnInit {
       }
     });
   }
-
+  
   cambiarImagen(event: any): any {
     const file = event.target.files[0];
     this.imagenSubir = file;

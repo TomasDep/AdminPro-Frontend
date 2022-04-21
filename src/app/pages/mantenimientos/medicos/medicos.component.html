@@ -36,8 +36,9 @@
           </div>
           <div class="col-4">
             <div class="text-right">
-              <a class="btn btn-primary"
-                      routerLink="/dashboard/medico/nuevo"
+              <a [class]="themeColor"
+                 class="btn"
+                 routerLink="/dashboard/medico/nuevo"
               >
                 <i class="fa fa-hospital-o"></i>
                 {{ "MAINTAINERS.MEDICS.CREATE" | translate }}

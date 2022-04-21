@@ -30,7 +30,11 @@
               >
             </div>
           </div>
-          <button type="submit" class="btn btn-success btn-block waves-effect waves-light m-r-10" [disabled]="perfilForm.invalid">
+          <button type="submit" 
+                  [class]="themeColor" 
+                  class="btn btn-block waves-effect waves-light m-r-10" 
+                  [disabled]="perfilForm.invalid"
+          >
             <i class="fa fa-save"></i>
             {{ "PERFIL.FORM.BUTTON.SAVE" | translate }}
           </button>
@@ -44,14 +48,19 @@
       <div class="card-body">
         <h4 class="card-title">{{ "PERFIL.IMAGE.TITLE" | translate }}</h4>
         <h6 class="card-subtitle">{{ "PERFIL.IMAGE.SUBTITLE" | translate }}</h6>
-        <div class="text-center mb-2">
-          <img *ngIf="!imgTemp" [src]="usuario.imagenUrl" class="img-avatar" />
-          <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar" />
+        <div class="image-upload">
+          <div class="text-center mb-2">
+            <label for="image-input" class="pointer">
+              <img *ngIf="!imgTemp" [src]="usuario.imagenUrl" class="img-avatar" />
+              <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar" />
+            </label>
+          </div>
+          <input id="image-input" type="file" (change)="cambiarImagen($event)">
         </div>
-        <input type="file" (change)="cambiarImagen($event)">
         <br><br>
-        <button type="button" 
-                class="btn btn-success btn-block waves-effect waves-light m-r-10"
+        <button type="button"
+                [class]="themeColor"
+                class="btn btn-block waves-effect waves-light m-r-10"
                 [disabled]="!imagenSubir"
                 (click)="subirImagen()"
         >

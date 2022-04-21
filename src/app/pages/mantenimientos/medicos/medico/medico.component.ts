@@ -20,6 +20,7 @@ export class MedicoComponent implements OnInit {
   public updateText: string = '';
   public createTitle: string = '';
   public createText: string = '';
+  public themeColor: string = 'default';
   public medicoForm!: FormGroup;
   public hospitales: Hospital[] = [];
   public hospitalSeleccionado: Hospital = new Hospital('', '');
@@ -36,6 +37,8 @@ export class MedicoComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(({ id }) => this.cargarMedico(id));
+
+    this.themeColor = localStorage.getItem('themeButton') || 'default';
 
     this.medicoForm = this.fb.group({
       nombre: ['', Validators.required],

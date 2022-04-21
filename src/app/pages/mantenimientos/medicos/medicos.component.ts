@@ -21,6 +21,7 @@ export class MedicosComponent implements OnInit, OnDestroy {
   public deleteCancel: string = '';
   public deleteConfirmTitle: string = '';
   public deleteConfirmText: string = '';
+  public themeColor: string = 'default';
   public cargando: boolean = true;
   public desde: number = 0;
   public totalMedicos: number = 0;
@@ -37,6 +38,7 @@ export class MedicosComponent implements OnInit, OnDestroy {
   
   ngOnInit(): void {
     this.cargarMedicos();
+    this.themeColor = localStorage.getItem('themeButton') || 'default';
     
     this.imgSubs = this.modalImagenService.nuevaImagen
     .pipe(delay(300))
