@@ -45,6 +45,36 @@
   display: none;
 }
 
+.default, .default-dark {
+  background: #2a3e52 !important;
+  color: #eee;
+}
+
+.green, .green-dark {
+  background: #06d79c !important;
+  color: #eee;
+}
+
+.red, .red-dark {
+  background: #ef5350 !important;
+  color: #eee;
+}
+
+.blue, .blue-dark {
+  background: #1976d2 !important;
+  color: #eee;
+}
+
+.purple, .purple-dark {
+  background: #7460ee !important;
+  color: #eee;
+}
+
+.megna, .megna-dark {
+  background: #56c0d8 !important;
+  color: #eee;
+}
+
 .w75 { width: 75px; }
 
 .w100 { width: 100px; }
