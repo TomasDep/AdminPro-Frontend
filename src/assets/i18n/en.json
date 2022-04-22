@@ -76,14 +76,24 @@
         "SEARCH": "Find hospital",
         "NAME": "Hospital name"
       },
-      "ALERTS": {
-        "UPDATE": "Update",
-        "DELETE": "Erased",
+      "SWAL": {
+        "UPDATE": {
+          "TITLE": "Updated",
+          "TEXT": "param hospital has been upgraded"
+        },
+        "DELETE": {
+          "TITLE": "Erased",
+          "TEXT": "param hospital has been eliminated"
+        },
         "CREATE": {
           "TITLE": "New hospital",
           "TEXT": "Enter the name of the new hospital",
           "PLACEHOLDER": {
             "NAME": "Hospital name"
+          },
+          "BUTTON": {
+            "ADD": "Add",
+            "CANCEL": "Cancel"
           }
         }
       }
@@ -98,18 +108,18 @@
       "PLACEHOLDER": {
         "SEARCH": "Find doctors"
       },
-      "ALERTS": {
+      "SWAL": {
         "UPDATE": "Updated",
         "DELETE": {
           "TITLE": "Delete doctor?",
-          "TEXT": "Are you sure you want to delete",
+          "TEXT": "Are you sure to delete the doctor param",
           "BUTTON": {
             "CONFIRM": "Yes, delete it",
             "CANCEL": "Cancel"
           },
-          "SWALDELETE": {
-            "TITLE": "Erased!!",
-            "TEXT": "The doctor has been successfully deleted"
+          "CONFIRMDELETE": {
+            "TITLE": "Erased",
+            "TEXT": "The param doctor has been deleted successfully"
           }
         }
       },

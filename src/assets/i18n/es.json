@@ -76,14 +76,24 @@
         "SEARCH": "Buscar hospitales",
         "NAME": "Nombre del hospital"
       },
-      "ALERTS": {
-        "UPDATE": "Actualizado",
-        "DELETE": "Eliminado",
+      "SWAL": {
+        "UPDATE": {
+          "TITLE": "Actualizado",
+          "TEXT": "El hospital param ha sido actualizado"
+        },
+        "DELETE": {
+          "TITLE": "Eliminado",
+          "TEXT": "El hospital param ha sido eliminado"
+        },
         "CREATE": {
           "TITLE": "Nuevo hospital",
           "TEXT": "Ingrese el nombre del nuevo hospital",
           "PLACEHOLDER": {
             "NAME": "Nombre del hospital"
+          },
+          "BUTTON": {
+            "ADD": "Agregar",
+            "CANCEL": "Cancelar"
           }
         }
       }
@@ -98,18 +108,18 @@
       "PLACEHOLDER": {
         "SEARCH": "Buscar medicos"
       },
-      "ALERTS": {
+      "SWAL": {
         "UPDATE": "Actualizado",
         "DELETE": {
           "TITLE": "¿Borrar medico?",
-          "TEXT": "Esta seguro de borrar a",
+          "TEXT": "Esta seguro de borrar al medico param",
           "BUTTON": {
             "CONFIRM": "Si, borralo",
             "CANCEL": "Cancelar"
           },
-          "SWALDELETE": {
-            "TITLE": "Borrado!",
-            "TEXT": "Se ha borrado satisfactoriamente al medico"
+          "CONFIRMDELETE": {
+            "TITLE": "Borrado",
+            "TEXT": "El medico param ha sido borrado correctamente"
           }
         },
         "CREATE": {
