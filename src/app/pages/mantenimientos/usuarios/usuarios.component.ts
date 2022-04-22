@@ -15,7 +15,8 @@ import { UsuarioService, BusquedaService, ModalImagenService } from '@services/i
 })
 export class UsuariosComponent implements OnInit, OnDestroy {
   private tipo: string = 'usuarios';
-  public placeholderSearch: string = '';
+  public placeholderSearch: string = '';  
+  public themeColor: string = 'default';
   public cargando: boolean = true;
   public totalUsuarios: number = 0;
   public desde: number = 0;
@@ -32,6 +33,8 @@ export class UsuariosComponent implements OnInit, OnDestroy {
   
   ngOnInit(): void {
     this.cargarUsuarios();
+    
+    this.themeColor = localStorage.getItem('themeButton') || 'default';
     
     this.imgSubs = this.modalImagenService.nuevaImagen
                         .pipe(delay(300))
@@ -83,7 +86,12 @@ export class UsuariosComponent implements OnInit, OnDestroy {
   eliminarUsuario(usuario: Usuario): any {
     if (usuario.uid === this.usuarioService.uid) {
       this.translate.get("MAINTAINERS.USERS.SWAL.ERROR").subscribe(resp => {
-        return Swal.fire(resp.TITLE, resp.TEXT, 'error');
+        return Swal.fire({
+          title: resp.TITLE, 
+          text: resp.TEXT, 
+          icon: 'error',
+          confirmButtonColor: this.confirmButtonColorTheme()
+        });
       });
     } else {
       this.translate.get("MAINTAINERS.USERS.SWAL.DELETE").subscribe(resp => {
@@ -93,14 +101,16 @@ export class UsuariosComponent implements OnInit, OnDestroy {
         const successTitle: string = resp.SUCCESS.TITLE;
         let text: string = resp.TEXT;
         let successText: string = resp.SUCCESS.TEXT;
+
         text = text.replace('param', usuario.nombre);
         successText = successText.replace('param', usuario.nombre);
+        
         return Swal.fire({
           title,
           text,
           icon: 'question',
           showCancelButton: true,
-          confirmButtonColor: '#3085d6',
+          confirmButtonColor: this.confirmButtonColorTheme(),
           cancelButtonColor: '#d33',
           confirmButtonText,
           cancelButtonText
@@ -108,10 +118,12 @@ export class UsuariosComponent implements OnInit, OnDestroy {
           if (result.isConfirmed) {
             this.usuarioService.eliminarUsuario(usuario).subscribe(resp => {
               this.cargarUsuarios();
-              Swal.fire(
-                successTitle,
-                successText,
-                'success'
+              Swal.fire({
+                title: successTitle,
+                text: successText,
+                icon: 'success',
+                confirmButtonColor: this.confirmButtonColorTheme()
+              }
               );
             });
           }
@@ -126,5 +138,37 @@ export class UsuariosComponent implements OnInit, OnDestroy {
 
   abrirModal(usuario: Usuario): void {
     this.modalImagenService.abrirModal(this.tipo, usuario.uid!, usuario.img);
+  }
+
+  confirmButtonColorTheme(): string {
+    switch (this.themeColor) {
+      case 'red':
+        return '#ef5350';
+      case 'red-dark':
+        return '#ef5350';
+
+      case 'green':
+        return '#06d79c';
+      case 'green-dark':
+        return '#06d79c';
+
+      case 'blue':
+        return '#1976d2';
+      case'blue-dark':
+        return '#1976d2';
+
+      case 'purple':
+        return '#7460ee';
+      case 'purple-dark':
+        return '#7460ee';
+
+      case 'megna':
+        return '#56c0d8';
+      case 'megna-dark':
+        return '#56c0d8';
+
+      default:
+        return '#2a3e52';
+    }
   }
 }

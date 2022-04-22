@@ -16,10 +16,6 @@ import { HospitalService, MedicoService } from '@services/index';
 })
 export class MedicoComponent implements OnInit {
   public placeholderName: string = '';
-  public updateTitle: string = '';
-  public updateText: string = '';
-  public createTitle: string = '';
-  public createText: string = '';
   public themeColor: string = 'default';
   public medicoForm!: FormGroup;
   public hospitales: Hospital[] = [];
@@ -47,19 +43,22 @@ export class MedicoComponent implements OnInit {
 
     this.cargarHospitales();
 
-    this.medicoForm.get('hospital')?.valueChanges.subscribe(hospitalId => {
-      this.hospitalSeleccionado = this.hospitales.find(hospital => hospital._id === hospitalId)!;
-    });
+    this.medicoForm.get('hospital')?.valueChanges
+      .subscribe(hospitalId => {
+        this.hospitalSeleccionado = this.hospitales.find(hospital => hospital._id === hospitalId)!;
+      });
 
-    this.translate.get("MAINTAINERS.MEDICS.MEDIC.FORM.PLACEHOLDER").subscribe(resp => {
-      this.placeholderName = resp.NAME;
-    });
+    this.translate.get("MAINTAINERS.MEDICS.MEDIC.FORM.PLACEHOLDER")
+      .subscribe(resp => {
+        this.placeholderName = resp.NAME;
+      });
   }
   
   cargarHospitales(): void {
-    this.hospitalService.cargarHospitales().subscribe((hospitales: Hospital[]) => {
-      this.hospitales = hospitales;
-    });
+    this.hospitalService.cargarHospitales()
+      .subscribe((hospitales: Hospital[]) => {
+        this.hospitales = hospitales;
+      });
   }
   
   cargarMedico(id: string): void {
@@ -88,29 +87,76 @@ export class MedicoComponent implements OnInit {
     const nombre: string = this.medicoForm.value.nombre;
     const hospital: string = this.medicoForm.value.hospital;
     
-    if (this.medicoSeleccionado) { 
+
+    if (this.medicoSeleccionado._id !== '') { 
       const data = {
         ...this.medicoForm.value,
         _id: this.medicoSeleccionado._id
       }
+      
       this.medicoService.actualizarMedico(data).subscribe(resp => {
-        this.translate.get('MAINTAINERS.MEDICS.MEDIC.SWAL.UPDATE').subscribe(lang => {
-          this.updateTitle = lang.TITLE;
-          this.updateText = lang.TEXT;
-          this.updateText = this.updateText.replace('param', nombre);
-        });
-        Swal.fire(this.updateTitle, this.updateText, 'success');
+        this.translate.get('MAINTAINERS.MEDICS.MEDIC.SWAL.UPDATE')
+          .subscribe(resp => {
+            let text: string = resp.TEXT;
+            text = text.replace('param', nombre);
+
+            Swal.fire({
+              title: resp.TITLE,
+              text,
+              icon: 'success',
+              confirmButtonColor: this.confirmButtonColorTheme()
+            });
+          });
       });
     } else {
-      this.translate.get('MAINTAINERS.MEDICS.MEDIC.SWAL.CREATE').subscribe(lang => {
-        this.createTitle = lang.TITLE;
-        this.createText = lang.TEXT;
-        this.createText = this.createText.replace('param', nombre);
-      });
-      this.medicoService.crearMedico({ nombre, hospital }).subscribe((resp: any) => {
-        Swal.fire(this.createText, this.createText, 'success');
-        this.router.navigateByUrl(`/dashboard/medico/${ resp.medico.uid }`);
-      });
+      this.translate.get('MAINTAINERS.MEDICS.MEDIC.SWAL.CREATE')
+        .subscribe(lang => {
+          let text: string = lang.TEXT;
+          text = text.replace('param', nombre);
+          
+          this.medicoService.crearMedico({ nombre, hospital })
+            .subscribe((resp: any) => {
+              Swal.fire({
+                title: lang.TITLE, 
+                text, 
+                icon: 'success',
+                confirmButtonColor: this.confirmButtonColorTheme()
+              });
+              this.router.navigateByUrl(`/dashboard/medico/${ resp.medico.uid }`);
+            });
+        });
+    }
+  }
+
+  confirmButtonColorTheme(): string {
+    switch (this.themeColor) {
+      case 'red':
+        return '#ef5350';
+      case 'red-dark':
+        return '#ef5350';
+
+      case 'green':
+        return '#06d79c';
+      case 'green-dark':
+        return '#06d79c';
+
+      case 'blue':
+        return '#1976d2';
+      case'blue-dark':
+        return '#1976d2';
+
+      case 'purple':
+        return '#7460ee';
+      case 'purple-dark':
+        return '#7460ee';
+
+      case 'megna':
+        return '#56c0d8';
+      case 'megna-dark':
+        return '#56c0d8';
+
+      default:
+        return '#2a3e52';
     }
   }
 }

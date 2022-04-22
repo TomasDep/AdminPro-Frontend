@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { delay, Subscription } from 'rxjs';
 
-import Swal from 'sweetalert2';
 import { TranslateService } from '@ngx-translate/core';
+import Swal from 'sweetalert2';
 
 import { Medico } from '@models/medico.model';
 import { BusquedaService, MedicoService, ModalImagenService } from '@services/index';
@@ -15,12 +15,6 @@ import { BusquedaService, MedicoService, ModalImagenService } from '@services/in
 export class MedicosComponent implements OnInit, OnDestroy {
   public tipo: string = 'medicos';
   public placeholderMedics: string = '';
-  public deleteTitle: string = '';
-  public deleteText: string = '';
-  public deleteButton: string = '';
-  public deleteCancel: string = '';
-  public deleteConfirmTitle: string = '';
-  public deleteConfirmText: string = '';
   public themeColor: string = 'default';
   public cargando: boolean = true;
   public desde: number = 0;
@@ -38,20 +32,15 @@ export class MedicosComponent implements OnInit, OnDestroy {
   
   ngOnInit(): void {
     this.cargarMedicos();
+    
     this.themeColor = localStorage.getItem('themeButton') || 'default';
     
     this.imgSubs = this.modalImagenService.nuevaImagen
-    .pipe(delay(300))
-    .subscribe(img => this.cargarMedicos());
+                        .pipe(delay(300))
+                        .subscribe(img => this.cargarMedicos());
 
     this.translate.get('MAINTAINERS.MEDICS').subscribe(resp => {
       this.placeholderMedics = resp.PLACEHOLDER.SEARCH;
-      this.deleteTitle = resp.ALERTS.DELETE.TITLE;
-      this.deleteText = resp.ALERTS.DELETE.TEXT;
-      this.deleteButton = resp.ALERTS.DELETE.BUTTON.CONFIRM;
-      this.deleteCancel = resp.ALERTS.DELETE.BUTTON.CANCEL;
-      this.deleteConfirmTitle = resp.ALERTS.DELETE.SWALDELETE.TITLE;
-      this.deleteConfirmText = resp.ALERTS.DELETE.SWALDELETE.TEXT;
     });
   }
 
@@ -61,12 +50,13 @@ export class MedicosComponent implements OnInit, OnDestroy {
 
   cargarMedicos(): void {
     this.cargando = true;
-    this.medicoService.cargarMedicos(this.desde).subscribe(medicos => {
-      this.medicos = medicos;
-      this.medicosTemp = medicos;
-      this.totalMedicos = this.medicoService.totalMedicos;
-      this.cargando = false;
-    });
+    this.medicoService.cargarMedicos(this.desde)
+      .subscribe(medicos => {
+        this.medicos = medicos;
+        this.medicosTemp = medicos;
+        this.totalMedicos = this.medicoService.totalMedicos;
+        this.cargando = false;
+      });
   }
 
   cambiarPagina(valor: number): void {
@@ -89,35 +79,80 @@ export class MedicosComponent implements OnInit, OnDestroy {
     if (termino.length === 0) {
       return this.medicos = this.medicosTemp;
     } else {
-      this.busquedaService.buscarMedicos(this.tipo, termino).subscribe((resp: Medico[]) => {
-        this.medicos = resp;
-        return this.medicos;
-      });
+      this.busquedaService.buscarMedicos(this.tipo, termino)
+        .subscribe((resp: Medico[]) => {
+          this.medicos = resp;
+          return this.medicos;
+        });
     }
     return [];
   }
 
   borrarMedico(medico: Medico): void {
-    Swal.fire({
-      title: this.deleteTitle,
-      text: `${ this.deleteText } ${ medico.nombre }`,
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: this.deleteButton,
-      cancelButtonText: this.deleteCancel
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.medicoService.borrarMedico(medico._id || '').subscribe(resp => {
-          this.cargarMedicos();
-          Swal.fire(
-          this.deleteConfirmTitle,
-            `${ this.deleteConfirmText } ${ medico.nombre }`,
-            'success'
-          );
-        });
-      }
+    this.translate.get('MAINTAINERS.MEDICS.SWAL.DELETE').subscribe(resp => {
+      let text: string = resp.TEXT;
+      let textConfirm: string = resp.CONFIRMDELETE.TEXT;
+      let titleConfirm: string = resp.CONFIRMDELETE.TITLE;
+      
+      text = text.replace('param', medico.nombre);
+      textConfirm = textConfirm.replace('param', medico.nombre);
+
+      Swal.fire({
+        title: resp.TITLE,
+        text,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: resp.BUTTON.CONFIRM,
+        confirmButtonColor: this.confirmButtonColorTheme(),
+        cancelButtonText: resp.BUTTON.CANCEL,
+        cancelButtonColor: '#d33'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.medicoService.borrarMedico(medico._id || '')
+            .subscribe(resp => {
+              this.cargarMedicos();
+
+              Swal.fire({
+                title: titleConfirm,
+                text: textConfirm,
+                icon: 'success',
+                confirmButtonColor: this.confirmButtonColorTheme()
+              });
+            });
+        }
+      });
     });
+  }
+
+  confirmButtonColorTheme(): string {
+    switch (this.themeColor) {
+      case 'red':
+        return '#ef5350';
+      case 'red-dark':
+        return '#ef5350';
+
+      case 'green':
+        return '#06d79c';
+      case 'green-dark':
+        return '#06d79c';
+
+      case 'blue':
+        return '#1976d2';
+      case'blue-dark':
+        return '#1976d2';
+
+      case 'purple':
+        return '#7460ee';
+      case 'purple-dark':
+        return '#7460ee';
+
+      case 'megna':
+        return '#56c0d8';
+      case 'megna-dark':
+        return '#56c0d8';
+
+      default:
+        return '#2a3e52';
+    }
   }
 }
