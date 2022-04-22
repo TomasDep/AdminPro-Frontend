@@ -75,6 +75,28 @@
   color: #eee;
 }
 
+.button, .button:link, .button:visited {
+  display: inline-block;
+  text-decoration: none;
+  padding: 4px 10px;
+  font-size: 17px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.button:link, .button:visited {
+  color: #eee;
+}
+
+.button:hover, .button:active {
+  opacity: 0.9;
+  color: #fff;
+}
+
+.p15 { padding: 15px }
+
 .w75 { width: 75px; }
 
 .w100 { width: 100px; }
