@@ -17,19 +17,18 @@
                   aria-label="Close"
                   (click)="cerrarModal"
           >
-            <span aria-hidden="true">×</span>
           </button>
         </div>
         <div class="modal-body">
           <h3>{{ "MODALIMAGEN.SUBTITLE" | translate }}</h3>
           <div class="container">
             <div class="d-flex flex-column">
-              <div class="text-center mb-2">
+              <div class="text-center mb-2 p15">
                 <img *ngIf="!imgTemp" [src]="modalImagenService.img" class="img-avatar" />
                 <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar" />
               </div>
-              <div id="file" [class]="themeColor" class="pointer">
-                <p id="addImage">{{ "MODALIMAGEN.BUTTON.TEXT" | translate }}</p>
+              <div id="file" [class]="themeColor" class="button">
+                <a id="addImage">{{ "MODALIMAGEN.BUTTON.TEXT" | translate }}</a>
                 <input type="file" id="btnAddImage" (change)="cambiarImagen($event)">
               </div>
             </div>
@@ -46,7 +45,7 @@
           <button type="button" 
                   (click)="subirImagen()"
                   [class]="themeColor"
-                  class="btn"
+                  class="button"
           >
             {{ "MODALIMAGEN.BUTTON.UPDATE" | translate }}
           </button>
