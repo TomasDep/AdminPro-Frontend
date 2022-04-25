@@ -16,10 +16,10 @@ export class PerfilComponent implements OnInit {
   public imgTemp: any = '';
   public placeholderName: string = '';
   public placeholderEmail: string = '';
+  public themeColor: string = '';
   public perfilForm!: FormGroup;
   public usuario: Usuario;
   public imagenSubir!: File;
-  public themeColor: string = '';
 
   constructor(
     private formBuilder: FormBuilder, 
