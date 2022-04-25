@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private lang: string = localStorage.getItem('lang') || 'en';
+  private lang: string = localStorage.getItem('lang') || '';
   public title = 'adminpro';
   
   constructor(public translate: TranslateService) {
