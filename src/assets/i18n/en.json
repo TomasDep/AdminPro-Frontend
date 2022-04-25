@@ -1,4 +1,34 @@
 {
+  "LOGIN": {
+    "PLACEHOLDER": {
+      "EMAIL":"Email",
+      "PASSWORD": "Password"
+    },
+    "REMEMBER": "Remember me",
+    "LOGIN": "Log In",
+    "REGISTER": "Don't gave an account?",
+    "SIGNUP": "Sign Up"
+  },
+  "REGISTER": {
+    "TITLE": "Register Now",
+    "SUBTITLE": "Create your account and enjoy",
+    "PLACEHOLDER": {
+      "NAME": "Name",
+      "EMAIL": "Email",
+      "PASSWORD": "Password",
+      "CONFIRM": "Confirm password"
+    },
+    "TERMS": "I agree to all Terms",
+    "ERRORS": {
+      "NAME": "Name is required",
+      "EMAIL": "Email is required and valid",
+      "PASSWORDS": "Passwords do not match",
+      "TERMS": "You must accept the terms"
+    },
+    "SIGNUP": "Sign Up",
+    "ACCOUNT": "Already have an account?",
+    "SIGNIN": "Sign In"
+  },
   "BREADCRUMBS": {
     "HOME": "Home",
     "PAGES": "Pages",

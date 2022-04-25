@@ -1,4 +1,34 @@
 {
+  "LOGIN": {
+    "PLACEHOLDER": {
+      "EMAIL": "Correo electronico",
+      "PASSWORD": "Contraseña"
+    },
+    "REMEMBER": "Recuérdame",
+    "LOGIN": "Iniciar sesión",
+    "REGISTER": "¿No tienes una cuenta?",
+    "SIGNUP": "Regístrate!!!"
+  },
+  "REGISTER": {
+    "TITLE": "Regístrate ahora",
+    "SUBTITLE": "Crea tu cuenta y disfruta",
+    "PLACEHOLDER": {
+      "NAME": "Nombre",
+      "EMAIL": "Correo electrónico",
+      "PASSWORD": "Contraseña",
+      "CONFIRM": "Confirmar contraseña"
+    },
+    "TERMS": "Acepto todos los Términos",
+    "ERRORS": {
+      "NAME": "El nombre es requerido",
+      "EMAIL": "El email es requerido y valido ",
+      "PASSWORDS": "Las contraseñas no son iguales",
+      "TERMS": "Debe aceptar los terminos de uso"
+    },
+    "SIGNUP": "Registrarse",
+    "ACCOUNT": "¿Ya tienes una cuenta?",
+    "SIGNIN": "Iniciar sesión"
+  },
   "BREADCRUMBS": {
     "HOME": "Inicio",
     "PAGES": "página",
