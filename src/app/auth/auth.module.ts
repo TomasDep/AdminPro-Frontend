@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 import { LoginComponent, RegisterComponent } from '@auth/index'
 
 @NgModule({
@@ -16,7 +18,8 @@ import { LoginComponent, RegisterComponent } from '@auth/index'
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    TranslateModule
   ],
   exports: [
     LoginComponent,

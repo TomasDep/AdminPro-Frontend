@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { 
   AbstractControl,
   FormControl,
@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 
 import { UsuarioService } from '@services/usuario.service';
@@ -17,7 +18,11 @@ import { UsuarioService } from '@services/usuario.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
+  public placeholderName: string = '';
+  public placeholderEmail: string = '';
+  public placeholderPassword: string = '';
+  public placeholderConfirm: string = '';
   public formSubmitted: boolean = true;
   public registerForm: FormGroup = new FormGroup({
     nombre: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -29,8 +34,18 @@ export class RegisterComponent {
 
   constructor(
     private usuarioService: UsuarioService,
-    private router: Router
+    private router: Router,
+    public translate: TranslateService
   ) { }
+  
+  ngOnInit(): void {
+    this.translate.get('REGISTER.PLACEHOLDER').subscribe(resp => {
+       this.placeholderName = resp.NAME;
+       this.placeholderEmail = resp.EMAIL;
+       this.placeholderPassword = resp.PASSWORD;
+       this.placeholderConfirm = resp.CONFIRM;
+    });
+  }
 
   crearUsuario(): void {
     this.formSubmitted = true;

@@ -15,57 +15,80 @@
           <br/>
           <img src="./assets/images/logo-text.png" alt="Home" />
         </a>
-        <h3 class="box-title m-t-40 m-b-0">Register Now</h3>
-        <small>Create your account and enjoy</small>
+        <h3 class="box-title m-t-40 m-b-0">{{ "REGISTER.TITLE" | translate }}</h3>
+        <small>{{ "REGISTER.SUBTITLE" | translate }}</small>
         <div class="form-group m-t-20">
           <div class="col-xs-12">
-            <input class="form-control" type="text" placeholder="Name" formControlName="nombre">
+            <input class="form-control" 
+                   type="text" 
+                   [placeholder]="placeholderName" 
+                   formControlName="nombre"
+            >
           </div>
         </div>
         <div class="form-group">
           <div class="col-xs-12">
-            <input class="form-control" type="text" placeholder="Email" formControlName="email">
+            <input class="form-control" 
+                   type="text" 
+                   [placeholder]="placeholderEmail" 
+                   formControlName="email"
+            >
           </div>
         </div>
         <div class="form-group ">
           <div class="col-xs-12">
-            <input class="form-control" type="password" placeholder="Password" formControlName="password">
+            <input class="form-control" 
+                   type="password" 
+                   [placeholder]="placeholderPassword" 
+                   formControlName="password"
+            >
           </div>
         </div>
         <div class="form-group">
           <div class="col-xs-12">
-            <input class="form-control" type="password" placeholder="Confirm Password" formControlName="passwordConfirm">
+            <input class="form-control" 
+                   type="password" 
+                   [placeholder]="placeholderConfirm" 
+                   formControlName="passwordConfirm"
+            >
           </div>
         </div>
         <div class="form-group row">
           <div class="col-md-12">
             <div class="checkbox checkbox-primary p-t-0">
-              <input id="checkbox-signup" type="checkbox" formControlName="terminos">
-              <label for="checkbox-signup"> I agree to all <a href="#">Terms</a></label>
+              <input id="checkbox-signup" 
+                     type="checkbox" 
+                     formControlName="terminos"
+              >
+              <label for="checkbox-signup">
+                {{ "REGISTER.TERMS" | translate }}
+              </label>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col text-danger">
-            <p *ngIf="campoNoValido('nombre')">El nombre es obligatorio</p>
-            <p *ngIf="campoNoValido('email')">El email es obligatorio y valido</p>
-            <p *ngIf="contrasenasInvalidas()">Las contraseñas no coinciden</p>
-            <p *ngIf="aceptarTerminos()">Debe de aceptar los terminos de uso</p>
+            <p *ngIf="campoNoValido('nombre')">{{ "REGISTER.ERRORS.NAME" | translate }}</p>
+            <p *ngIf="campoNoValido('email')">{{ "REGISTER.ERRORS.EMAIL" | translate }}</p>
+            <p *ngIf="contrasenasInvalidas()">{{ "REGISTER.ERRORS.PASSWORDS" | translate }}</p>
+            <p *ngIf="aceptarTerminos()">{{ "REGISTER.ERRORS.TERMS" | translate }}</p>
           </div>
         </div>
         <div class="form-group text-center m-t-20">
           <div class="col-xs-12">
-            <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">
-              Sign Up
+            <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" 
+                    type="submit"
+            >
+              {{ "REGISTER.SIGNUP" | translate }}
             </button>
           </div>
         </div>
         <div class="form-group m-b-0">
           <div class="col-sm-12 text-center">
             <p>
-              Already have an account? 
+              {{ "REGISTER.ACCOUNT" | translate }}
               <a routerLink="/login" class="text-info m-l-5">
-                <b>Sign In</b>
+                <b>{{ "REGISTER.SIGNIN" | translate }}</b>
               </a>
             </p>
           </div>

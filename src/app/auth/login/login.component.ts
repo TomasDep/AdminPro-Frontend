@@ -2,6 +2,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 
 import { UsuarioService } from '@services/usuario.service';
@@ -14,23 +15,46 @@ declare const gapi: any;
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit{
-  public formSubmitted: boolean = false;
   public auth2: any;
+  public placeholderEmail: string = '';
+  public placeholderPassword: string = '';
+  public lang: string = localStorage.getItem('lang') || '';
+  public formSubmitted: boolean = false;
   public loginForm = this.formBuilder.group({
-    email: [sessionStorage.getItem('email') || '', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-    remember: [false]
+    email: [
+             sessionStorage.getItem('email') || '', 
+             [ Validators.required, Validators.email ]
+          ],
+    password: [ '', Validators.required ],
+    remember: [ false ]
   });
 
   constructor(
     private router: Router, 
     private formBuilder: FormBuilder, 
     private usuarioService: UsuarioService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    public translate: TranslateService
   ) { }
   
   ngOnInit(): void {
+    this.getLang();
     this.renderButton();
+    
+    this.translate.get('LOGIN.PLACEHOLDER').subscribe(resp => {
+      this.placeholderEmail = resp.EMAIL;
+      this.placeholderPassword = resp.PASSWORD;
+    });
+  }
+  
+  getLang(): void {
+    if (window.navigator.language.includes('es')) {
+      localStorage.setItem('lang', 'es');
+      this.translate.use('es');
+    } else {
+      localStorage.setItem('lang', 'en');
+      this.translate.use('en');
+    }
   }
 
   login(): void {
