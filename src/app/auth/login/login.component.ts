@@ -48,7 +48,9 @@ export class LoginComponent implements OnInit{
   }
   
   getLang(): void {
-    if (window.navigator.language.includes('es')) {
+    if (localStorage.getItem('lang')) {
+      this.translate.use(localStorage.getItem('lang') || 'en')
+    } else if (window.navigator.language.includes('es')) {
       localStorage.setItem('lang', 'es');
       this.translate.use('es');
     } else {
@@ -124,6 +126,5 @@ export class LoginComponent implements OnInit{
     } else {
       Swal.fire('Error', e.error.message, 'error');
     }
-
   }
 }
