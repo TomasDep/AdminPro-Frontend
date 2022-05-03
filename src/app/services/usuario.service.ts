@@ -12,12 +12,16 @@ const baseUrl = environment.baseUrl;
 
 declare const gapi: any;
 
+interface ILangForm {
+  lang: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
   public auth2: any;
-  public usuario: Usuario = new Usuario('', '', '', 'USER_ROLE');
+  public usuario: Usuario = new Usuario('', '', '', 'USER_ROLE', 'en');
   public totalUsuarios: number = 0;
 
   constructor(
@@ -59,8 +63,8 @@ export class UsuarioService {
     return this.http.get(`${ baseUrl }/login/renew`, this.headers)
                     .pipe(
                       map((resp: any) => {
-                        const { email, google, nombre, role, img = '', uid } = resp.usuario;
-                        this.usuario = new Usuario(uid, nombre, email, role, '', img, google);
+                        const { email, google, nombre, role, lang, img = '', uid } = resp.usuario;
+                        this.usuario = new Usuario(uid, nombre, email, role, lang, '', img, google);
                         this.setStorage(resp.token, resp.menu)
                         return true;
                       }),
@@ -110,8 +114,7 @@ export class UsuarioService {
   }
 
   logout(): void {
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('menu');
+    sessionStorage.clear();
   
     this.auth2.signOut().then(() => {
       this.ngZone.run(() => {
@@ -144,7 +147,8 @@ export class UsuarioService {
                                                user.uid, 
                                                user.nombre, 
                                                user.email, 
-                                               user.role, 
+                                               user.role,
+                                               user.lang,
                                                '', 
                                                user.img, 
                                                user.google

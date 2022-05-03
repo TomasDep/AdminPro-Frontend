@@ -28,21 +28,24 @@
   <div class="col-5">
     <div class="card">
       <div class="card-body">
-        <h4>{{ "SETTINGS.LANG.TITLE" | translate}}</h4>
-        <div class="r-panel-body">
-          <ul class="m-t-20 list">
-            <li class="list-left">
-              <a class="pointer" (click)="changeLang('es')">
-                <i class="flag-icon flag-icon-es fa-3x"></i> 
-              </a>
-            </li>
-            <li class="list-left">
-              <a class="pointer" (click)="changeLang('en')">
+        <h4>{{ "SETTINGS.LANG.TITLE" | translate }}</h4>
+        <form class="m-t-20" [formGroup]="langForm" (ngSubmit)="changeLang()">
+          <div class="container mb-3">
+            <div class="form-check form-check-inline">
+              <input id="spanish" class="form-check-input" type="radio" value="es" name="lang" formControlName="lang">
+              <label for="spanish" class="form-check-label">
+                <i class="flag-icon flag-icon-es fa-3x"></i>
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input id="english" class="form-check-input" type="radio" value="en" name="lang" formControlName="lang">
+              <label for="english" class="form-check-label">
                 <i class="flag-icon flag-icon-us fa-3x"></i> 
-              </a> 
-            </li>
-          </ul>
-        </div>
+              </label>
+            </div>
+          </div>
+          <button [class]="themeColor" class="button ml-3 mt-3" type="submit">{{ "SETTINGS.LANG.SUBMIT" | translate }}</button>
+        </form>
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 import { Component, NgZone, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -20,13 +20,14 @@ export class LoginComponent implements OnInit{
   public placeholderPassword: string = '';
   public lang: string = localStorage.getItem('lang') || '';
   public formSubmitted: boolean = false;
-  public loginForm = this.formBuilder.group({
+  public loginForm: FormGroup = this.formBuilder.group({
     email: [
              sessionStorage.getItem('email') || '', 
              [ Validators.required, Validators.email ]
           ],
     password: [ '', Validators.required ],
-    remember: [ false ]
+    remember: [ false ],
+    lang: [ this.lang ]
   });
 
   constructor(
@@ -49,7 +50,7 @@ export class LoginComponent implements OnInit{
   
   getLang(): void {
     if (localStorage.getItem('lang')) {
-      this.translate.use(localStorage.getItem('lang') || 'en')
+      this.translate.use(localStorage.getItem('lang') || 'en');
     } else if (window.navigator.language.includes('es')) {
       localStorage.setItem('lang', 'es');
       this.translate.use('es');
@@ -57,6 +58,8 @@ export class LoginComponent implements OnInit{
       localStorage.setItem('lang', 'en');
       this.translate.use('en');
     }
+
+    this.lang = localStorage.getItem('lang') || 'en';
   }
 
   login(): void {
