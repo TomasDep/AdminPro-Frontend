@@ -19,6 +19,7 @@ export class SidebarComponent  {
     public sidebarService: SidebarService,
     public translate: TranslateService
   ) { 
+    sidebarService.cargarMenu();
     this.usuario = usuarioService.usuario;
     this.menuItems = sidebarService.menu;
   }
