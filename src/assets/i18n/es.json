@@ -56,9 +56,10 @@
     },
     "LANG": {
       "TITLE": "Seleccionar idioma",
-      "OPTION": {
-        "SPAIN": "Español",
-        "ENGLISH": "Ingles"
+      "SUBMIT": "Guardar cambios",
+      "SWAL": {
+        "TITLE": "Lenguaje cambiado",
+        "TEXT": "Guardando cambios, por favor espere"
       }
     }
   },

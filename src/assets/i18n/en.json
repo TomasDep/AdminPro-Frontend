@@ -55,10 +55,11 @@
       "SIDEBARDARK": "With the dark sidebar"
     },
     "LANG": {
-      "TITLE": "Select language ",
-      "OPTION": {
-        "SPAIN": "Spanish",
-        "ENGLISH": "English"
+      "TITLE": "Select language",
+      "SUBMIT": "Save Changes",
+      "SWAL": {
+        "TITLE": "Language changed",
+        "TEXT": "Saving changes, please wait"
       }
     }
   },
