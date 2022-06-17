@@ -1,6 +1,17 @@
-# Adminpro
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
+# AdminPro - Frontend
+
+## Descripción Proyecto
+
+AdminPro es un modulo para la administración de una organanización. El Proyecto es desarrollado con el framework de desarrollo web MEAN (Mongo, Express.js, Angular y Node.js)
+
+## Tecnologías Frontend
+
+-   Angular 13
+-  Plantilla AdminPro
+-  Google Sign In
+- Sweet Alert 2
+- Bootstrap 4
 
 ## Development server
 
